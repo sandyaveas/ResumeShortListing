@@ -5,6 +5,7 @@
 }
 
 <!-- Added from GitHub -->
+<!-- Added from VS 2019 -->
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -43,20 +44,20 @@
                         <p id="profile-designation" class="text-muted text-center">Software Engineer</p>
 
                         <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">                                
-                                <b><span class="fas fa-envelope mr-1 text-success"></span> Email</b> 
+                            <li class="list-group-item">
+                                <b><span class="fas fa-envelope mr-1 text-success"></span> Email</b>
                                 <a id="profile-email" class="float-right"></a>
                             </li>
                             <li class="list-group-item">
-                                <b>&nbsp;<i class="fas fa-mobile-alt text-success"></i>&nbsp; Mobile</b> 
+                                <b>&nbsp;<i class="fas fa-mobile-alt text-success"></i>&nbsp; Mobile</b>
                                 <a id="profile-mobile" class="float-right"></a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fas fa-business-time text-success"></i> Experience</b> 
+                                <b><i class="fas fa-business-time text-success"></i> Experience</b>
                                 <a id="profile-experience" class="float-right"></a>
                             </li>
                             <li class="list-group-item">
-                                <b><i class="fas fa-map-marker-alt mr-1 ml-1 text-success"></i> Location</b> 
+                                <b><i class="fas fa-map-marker-alt mr-1 ml-1 text-success"></i> Location</b>
                                 <a id="profile-location" class="float-right"></a>
                             </li>
                         </ul>
@@ -229,7 +230,7 @@
             <script type="text/javascript">
 
 
-                
+
 
 
                 $('#frmCandidate').validate({
@@ -348,7 +349,7 @@
                     var getBasicDetails1 = async (id) => {
 
                         $.get(`@Url.Action("GetBasicDetails")/${id}`)
-                            .done((data) => {                               
+                            .done((data) => {
 
                                 viewManager.setFormData('#frmCandidate', data);
 
