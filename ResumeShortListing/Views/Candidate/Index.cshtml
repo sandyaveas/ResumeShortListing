@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Candidate>
+
+@{
+    ViewData["Title"] = "Candidate";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Candidate</h1>
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"><a asp-action="Index" asp-controller="Candidate">Candidate</a></li>
+                    @*<li class="breadcrumb-item"><a href="#">Layout</a></li>
+                        <li class="breadcrumb-item active">Top Navigation</li>*@
+                </ol>
+            </div><!-- /.col -->
+            <div class="col-sm-6 ">
+                <a class="float-lg-right" asp-action="Profile">Add New</a>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container">
+
+        <table id="tabCandidate" class="table table-bordered table-striped dataTable dtr-inline">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </th>                   
+                    <th>
+                       Experience
+                    </th> 
+                    <th>
+                        @Html.DisplayNameFor(model => model.Location)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Mobile)
+                        </td>                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpYear) Years,
+                            @Html.DisplayFor(modelItem => item.ExpMonth) Months
+                        </td>                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        $("#tabCandidate").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+    </script>
+}
+<!-- /.Content -->

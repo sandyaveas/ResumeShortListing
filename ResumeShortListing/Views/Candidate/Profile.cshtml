@@ -1,0 +1,395 @@
+﻿
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Candidate</h1>
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active"><a asp-action="Index" asp-controller="Candidate">Candidate</a></li>
+                    <li class="breadcrumb-item"><a asp-action="Profile" asp-controller="Candidate">Profile</a></li>
+                    @*<li class="breadcrumb-item active">Top Navigation</li>*@
+                </ol>
+            </div><!-- /.col -->
+            <div class="col-sm-6 ">
+                <a class="btn btn-dark float-right" asp-action="Index">Back to List</a>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container">
+        <hr />
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card card-success card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="~/images/avatar.jpg" alt="">
+                        </div>
+
+                        <h3 id="profile-name" class="profile-username text-center"></h3>
+
+                        <p id="profile-designation" class="text-muted text-center">Software Engineer</p>
+
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">                                
+                                <b><span class="fas fa-envelope mr-1 text-success"></span> Email</b> 
+                                <a id="profile-email" class="float-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>&nbsp;<i class="fas fa-mobile-alt text-success"></i>&nbsp; Mobile</b> 
+                                <a id="profile-mobile" class="float-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b><i class="fas fa-business-time text-success"></i> Experience</b> 
+                                <a id="profile-experience" class="float-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b><i class="fas fa-map-marker-alt mr-1 ml-1 text-success"></i> Location</b> 
+                                <a id="profile-location" class="float-right"></a>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-book mr-1"></i> Experience</h5>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body bg-warning">
+                        <h5 class="card-title"><i class="fas fa-pencil-alt mr-1"></i> Skills</h5>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <form id="frmCandidate" class="card">
+                    <div class="card-header text-success">
+                        <h5> Basic Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div data-cntrl-hdn>
+                                <input id="Id" name="Id" type="hidden">
+                                <input id="Created" name="Created" type="hidden">
+                                <input id="LastUpdated" name="LastUpdated" type="hidden">
+                                <input id="LoggedInAt" name="LoggedInAt" type="hidden">
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group" data-cntrl>
+                                    <label for="Name" class="control-label">Name</label>
+                                    <input type="text" id="Name" name="Name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" data-cntrl>
+                                    <label for="Email" class="control-label">Email</label>
+                                    <input type="email" id="Email" name="Email" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" data-cntrl>
+                                    <label for="Mobile" class="control-label">Mobile</label>
+                                    <input type="text" id="Mobile" name="Mobile" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" data-cntrl>
+                                    <label for="ExpYear" class="control-label">Experience In Years</label>
+                                    <input type="number" id="ExpYear" name="ExpYear" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" data-cntrl>
+                                    <label for="ExpMonth" class="control-label">Experience In Months</label>
+                                    <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group" data-cntrl>
+                                    <label for="Location" class="control-label">Location</label>
+                                    <input type="text" id="Location" name="Location" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" value="Save" class="btn btn-success" onclick="candManager.saveBasic()" />
+                            <input type="button" value="Cancel" class="btn btn-secondary" />
+                        </div>
+                    </div>
+                </form>
+
+                @*<form asp-action="Edit" class="card">
+                        <div class="card-header text-success">
+                            <h5> Basic Details</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label asp-for="Id" class="control-label"></label>
+                                <input asp-for="Id" class="form-control" />
+                                <span asp-validation-for="Id" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CandidateId" class="control-label"></label>
+                                <input asp-for="CandidateId" class="form-control" />
+                                <span asp-validation-for="CandidateId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Designation" class="control-label"></label>
+                                <input asp-for="Designation" class="form-control" />
+                                <span asp-validation-for="Designation" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Organization" class="control-label"></label>
+                                <input asp-for="Organization" class="form-control" />
+                                <span asp-validation-for="Organization" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" asp-for="IsCurrent" /> @Html.DisplayNameFor(model => model.IsCurrent)
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartYear" class="control-label"></label>
+                                <input asp-for="StartYear" class="form-control" />
+                                <span asp-validation-for="StartYear" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartMonth" class="control-label"></label>
+                                <input asp-for="StartMonth" class="form-control" />
+                                <span asp-validation-for="StartMonth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndYear" class="control-label"></label>
+                                <input asp-for="EndYear" class="form-control" />
+                                <span asp-validation-for="EndYear" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndMonth" class="control-label"></label>
+                                <input asp-for="EndMonth" class="form-control" />
+                                <span asp-validation-for="EndMonth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CurrentSalary" class="control-label"></label>
+                                <input asp-for="CurrentSalary" class="form-control" />
+                                <span asp-validation-for="CurrentSalary" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="NoticePeriod" class="control-label"></label>
+                                <input asp-for="NoticePeriod" class="form-control" />
+                                <span asp-validation-for="NoticePeriod" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="JobProfile" class="control-label"></label>
+                                <input asp-for="JobProfile" class="form-control" />
+                                <span asp-validation-for="JobProfile" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Created" class="control-label"></label>
+                                <input asp-for="Created" class="form-control" />
+                                <span asp-validation-for="Created" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastUpdated" class="control-label"></label>
+                                <input asp-for="LastUpdated" class="form-control" />
+                                <span asp-validation-for="LastUpdated" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>*@
+            </div>
+        </div>
+
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+            <script type="text/javascript">
+
+
+                
+
+
+                $('#frmCandidate').validate({
+                    rules: {
+                        //email: {
+                        //    required: true,
+                        //    email: true,
+                        //},
+                        //password: {
+                        //    required: true,
+                        //    minlength: 5
+                        //},
+                        Location: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        //email: {
+                        //required: "Please enter a email address",
+                        //email: "Please enter a vaild email address"
+                        //},
+                        //password: {
+                        //required: "Please provide a password",
+                        //minlength: "Your password must be at least 5 characters long"
+                        //},
+                        Location: {
+                            required: "Please enter the Location"
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                        error.addClass('invalid-feedback');
+                        element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                        $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                        $(element).removeClass('is-invalid');
+    }
+                });
+
+
+
+                $(document).ready(() => {
+
+                    candManager.init();
+
+                });
+
+
+                var candManager = (() => {
+
+
+                    var init = async () => {
+
+                        viewManager.init({
+                            eleContainer: '#frmCandidate'
+                        });
+
+
+                        if (window.location.href.split('/').indexOf('Edit') >= 0) {
+
+                            var id = window.location.href.slice(-1);
+
+                            await loadData(id);
+                        }
+
+                    }
+
+
+
+
+                    var resetBasic = () => {
+
+
+                    }
+
+                    var saveBasic = () => {
+
+                        var data = viewManager.getFormData('#frmCandidate');
+
+                        if (data) {
+
+                            $.post('@Url.Action("BasicDetails")', data)
+                                .done((res) => {
+
+                                    if (res.isSuccess) {
+                                        toastr.success("Saved successfully", 'Saved');
+                                    }
+                                    else {
+                                        toastr.error("Failed to save", 'Error');
+                                    }
+
+                                }).fail(() => {
+
+                                    toastr.error("Failed to save", 'Error');
+
+                                })
+                        }
+                        else {
+                            toastr.error("Couldn't find data to save", 'Error');
+                        }
+                    }
+
+
+                    var loadData = async (id)=> {
+
+                        await Promise.all([
+                            getBasicDetails1(id),
+                            getBasicDetails2(id)
+                        ]);
+
+                    }
+
+                    var getBasicDetails1 = async (id) => {
+
+                        $.get(`@Url.Action("GetBasicDetails")/${id}`)
+                            .done((data) => {                               
+
+                                viewManager.setFormData('#frmCandidate', data);
+
+                                $('#profile-name').text(data.name);
+                                $('#profile-email').text(data.email);
+                                $('#profile-mobile').text(data.mobile);
+                                $('#profile-experience').text(data.expYear + ' years, ' + data.expMonth + ' months');
+                                $('#profile-location').text(data.location);
+
+
+                            }).fail(() => {
+
+                            })
+
+                    }
+
+                    var getBasicDetails2 = async (id) => {
+
+                        $.get(`@Url.Action("GetBasicDetails")/${id}`)
+                            .done((data) => {
+
+                                $('#Email').val(data.email);
+
+                            }).fail(() => {
+
+                            })
+
+                    }
+
+                    return {
+                        init: init,
+                        resetBasic: resetBasic,
+                        saveBasic : saveBasic
+                    }
+
+
+                })();
+
+
+            </script>
+
+        }
+    </div>
+</div>
+<!-- /.Content -->
