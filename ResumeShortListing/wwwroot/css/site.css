@@ -90,3 +90,7 @@ body {
     background-color: #ffc107;
     border-color: #ffc107;
 }
+
+.form-check {    
+    padding-left: 0px;
+}

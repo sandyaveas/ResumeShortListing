@@ -12,8 +12,16 @@
     <link href="~/lib/plugins/fontawesome-free/css/all.css" rel="stylesheet" />
     <link href="~/lib/template/dist/css/adminlte.css" rel="stylesheet" />
 
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link href="~/lib/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+
     <!-- Toastr -->
-    <link href="~/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />
+    @*<link href="~/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />*@
+
+    <!-- SweetAlert2 -->
+    @*<link href="~/lib/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />*@
+    @*<link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />*@
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/dark.css" rel="stylesheet" />
 
     <!-- DataTables -->
     <link href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -22,7 +30,7 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body class="layout-top-nav">
+<body class="layout-top-nav layout-footer-fixed">
 
     <div class="wrapper">
 
@@ -207,31 +215,17 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
-            <div class="float-right d-none d-sm-inline">
-                Anything you want
+            <div class="float-lg-right d-none d-sm-inline">
+                Find the source code on
+                <strong>  <a href="https://github.com/sandyaveas/ResumeShortListing" target="_blank" class="text-gray-dark"> <i class="fab fa-github "></i> GitHub </a> </strong>
             </div>
             <!-- Default to the left -->
-            <strong>Copyright © 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+            Made with <span class="fa fa-heart"></span> by Sandeep Trigunayat, 2020-2021
         </footer>
     </div>
 
 
-    <div class="wrapper">
-        <header>
-        </header>
-        <div class="content-wrapper">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.5
-            </div>
-            <strong>Copyright © 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
-        </footer>
-    </div>
+  
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
@@ -240,13 +234,19 @@
     <script src="~/lib/template/dist/js/adminlte.js"></script>
 
     <!-- Toastr -->
-    <script src="~/lib/plugins/toastr/toastr.min.js"></script>
+    @*<script src="~/lib/plugins/toastr/toastr.min.js"></script>*@
+
+    <!-- SweetAlert2 -->
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 
     <!-- DataTable -->
-    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>  
+    <script src="~/lib/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/lib/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="~/lib/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="~/lib/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- moment.js -->
+    <script src="~/lib/plugins/moment/moment.min.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

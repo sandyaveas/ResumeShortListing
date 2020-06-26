@@ -36,6 +36,13 @@ namespace ResumeShortListing.Controllers
             return Json(candidate);
         }
 
+        public async Task<ActionResult> GetExperiences(int id)
+        {
+            var jobExperiences = await _appServices.JobExperience.GetCandidateListAsync(id);
+
+            return Json(jobExperiences);
+        }
+
 
 
         [HttpPost]
@@ -45,6 +52,21 @@ namespace ResumeShortListing.Controllers
 
 
             if (_appServices.Candidate.Save(candidate) > 0)
+            {
+                isSuccess = true;
+            }
+
+            return Json(new { isSuccess });
+        }
+
+
+        [HttpPost]
+        public ActionResult Experience(JobExperience jobExperience)
+        {
+            bool isSuccess = false;
+
+
+            if (_appServices.JobExperience.Save(jobExperience) > 0)
             {
                 isSuccess = true;
             }

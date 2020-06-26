@@ -4,9 +4,17 @@
     ViewData["Title"] = "Profile";
 }
 
+
+<style>
+
+    .time-label {
+        font-size: 12px;
+    }
+</style>
+
+
 <!-- Added from GitHub -->
 <!-- Added from VS 2019 -->
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container">
@@ -141,86 +149,143 @@
                     </div>
                 </form>
 
-                @*<form asp-action="Edit" class="card">
-                        <div class="card-header text-success">
-                            <h5> Basic Details</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label asp-for="Id" class="control-label"></label>
-                                <input asp-for="Id" class="form-control" />
-                                <span asp-validation-for="Id" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CandidateId" class="control-label"></label>
-                                <input asp-for="CandidateId" class="form-control" />
-                                <span asp-validation-for="CandidateId" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Designation" class="control-label"></label>
-                                <input asp-for="Designation" class="form-control" />
-                                <span asp-validation-for="Designation" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Organization" class="control-label"></label>
-                                <input asp-for="Organization" class="form-control" />
-                                <span asp-validation-for="Organization" class="text-danger"></span>
-                            </div>
-                            <div class="form-group form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="IsCurrent" /> @Html.DisplayNameFor(model => model.IsCurrent)
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="StartYear" class="control-label"></label>
-                                <input asp-for="StartYear" class="form-control" />
-                                <span asp-validation-for="StartYear" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="StartMonth" class="control-label"></label>
-                                <input asp-for="StartMonth" class="form-control" />
-                                <span asp-validation-for="StartMonth" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="EndYear" class="control-label"></label>
-                                <input asp-for="EndYear" class="form-control" />
-                                <span asp-validation-for="EndYear" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="EndMonth" class="control-label"></label>
-                                <input asp-for="EndMonth" class="form-control" />
-                                <span asp-validation-for="EndMonth" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="CurrentSalary" class="control-label"></label>
-                                <input asp-for="CurrentSalary" class="form-control" />
-                                <span asp-validation-for="CurrentSalary" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="NoticePeriod" class="control-label"></label>
-                                <input asp-for="NoticePeriod" class="form-control" />
-                                <span asp-validation-for="NoticePeriod" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="JobProfile" class="control-label"></label>
-                                <input asp-for="JobProfile" class="form-control" />
-                                <span asp-validation-for="JobProfile" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Created" class="control-label"></label>
-                                <input asp-for="Created" class="form-control" />
-                                <span asp-validation-for="Created" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="LastUpdated" class="control-label"></label>
-                                <input asp-for="LastUpdated" class="form-control" />
-                                <span asp-validation-for="LastUpdated" class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Create" class="btn btn-primary" />
+
+                <div class="card">
+                    <div class="card-header text-success">
+                        <div class="row">
+                            <h5 class="col-lg-8">
+                                Experiences
+                            </h5>
+                            <div class="col-lg-4">
+                                <a href="javascript:void(0);" class="text-primary float-right" onclick="candManager.addExp(this)">Add <i class="fas fa-plus-circle"></i></a>
                             </div>
                         </div>
-                    </form>*@
+                    </div>
+                    <div class="card-body">
+
+                        
+
+                        <div class="timeline d-none">
+
+
+
+                            @*<div class="time-label">
+                                    <span class="bg-gradient-gray">10 Feb. 2014</span>
+                                </div>
+                                <div class="time-desc">
+                                    <i class="fas fa-business-time bg-gradient-cyan"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-edit text-green"></i></span>
+                                        <h2 class="timeline-header text-primary font-weight-bold" >Designation</h2>
+                                        <div class="timeline-body">
+                                            <span class="text-uppercase text-xs">Organization</span>
+                                            <br />
+                                            <small class="font-italic">JobProfile</small>
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <small class="font-italic">
+                                                <i class="fas fa-clock"></i> Jan, 2015
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                            <div class="time-label">
+                                <i class="fas fa-clock bg-gradient-teal"></i>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <form id="frmExperience" class="d-none">
+                            <div class="row">
+                                <div data-cntrl-hdn>
+                                    <input id="Id" name="Id" type="hidden">
+                                    <input id="CandidateId" name="CandidateId" type="hidden">
+                                    <input id="Created" name="Created" type="hidden">
+                                    <input id="LastUpdated" name="LastUpdated" type="hidden">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Designation" class="control-label">Designation</label>
+                                        <input name="Designation" id="Designation" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Organization" class="control-label">Organization</label>
+                                        <input name="Organization" id="Organization" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    <div class="form-group form-check" data-cntrl>
+
+
+                                        <label class="control-label">&nbsp;</label>
+                                        <br />
+
+                                        <div class="icheck-primary d-inline">
+                                            <input class="form-check-input" id="IsCurrent" name="IsCurrent" type="checkbox" />
+                                            <label for="IsCurrent"> Is Current</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="StartYear" class="control-label">Start Year</label>
+                                        <input type="number" id="StartYear" name="StartYear" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="StartMonth" class="control-label">Start Month</label>
+                                        <input type="number" id="StartMonth" name="StartMonth" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="EndYear" class="control-label">End Year</label>
+                                        <input type="number" id="EndYear" name="EndYear" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="EndMonth" class="control-label">End Month</label>
+                                        <input type="number" id="EndMonth" name="EndMonth" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="CurrentSalary" class="control-label">Salary</label>
+                                        <input type="number" id="CurrentSalary" name="CurrentSalary" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="NoticePeriod" class="control-label">Notice Period</label>
+                                        <input type="number" id="NoticePeriod" name="NoticePeriod" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="JobProfile" class="control-label">Describe Profile</label>
+                                        <textarea id="JobProfile" name="JobProfile" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="form-group">
+                                <input type="button" value="Save" class="btn btn-success" onclick="candManager.saveExpereince()" />
+                                <input type="button" value="Cancel" class="btn btn-secondary" onclick="candManager.cancelExpereince()" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -230,7 +295,7 @@
             <script type="text/javascript">
 
 
-
+                var id = 0;
 
 
                 $('#frmCandidate').validate({
@@ -294,7 +359,7 @@
 
                         if (window.location.href.split('/').indexOf('Edit') >= 0) {
 
-                            var id = window.location.href.slice(-1);
+                            id = window.location.href.slice(-1);
 
                             await loadData(id);
                         }
@@ -319,20 +384,21 @@
                                 .done((res) => {
 
                                     if (res.isSuccess) {
-                                        toastr.success("Saved successfully", 'Saved');
+
+                                        toastr.success('Saved', 'Saved successfully');
                                     }
                                     else {
-                                        toastr.error("Failed to save", 'Error');
+                                        toastr.error('Error', 'Failed to save');
                                     }
 
                                 }).fail(() => {
 
-                                    toastr.error("Failed to save", 'Error');
+                                    toastr.error('Error', 'Failed to save');
 
                                 })
                         }
                         else {
-                            toastr.error("Couldn't find data to save", 'Error');
+                            toastr.error('Error', "Couldn't find data to save");
                         }
                     }
 
@@ -340,24 +406,24 @@
                     var loadData = async (id)=> {
 
                         await Promise.all([
-                            getBasicDetails1(id),
-                            getBasicDetails2(id)
+                            getBasicDetails(id),
+                            getExperiences(id)
                         ]);
 
                     }
 
-                    var getBasicDetails1 = async (id) => {
+                    var getBasicDetails = async (id) => {
 
                         $.get(`@Url.Action("GetBasicDetails")/${id}`)
-                            .done((data) => {
+                            .done((candidate) => {
 
-                                viewManager.setFormData('#frmCandidate', data);
+                                viewManager.setFormData('#frmCandidate', candidate);
 
-                                $('#profile-name').text(data.name);
-                                $('#profile-email').text(data.email);
-                                $('#profile-mobile').text(data.mobile);
-                                $('#profile-experience').text(data.expYear + ' years, ' + data.expMonth + ' months');
-                                $('#profile-location').text(data.location);
+                                $('#profile-name').text(candidate.name);
+                                $('#profile-email').text(candidate.email);
+                                $('#profile-mobile').text(candidate.mobile);
+                                $('#profile-experience').text(candidate.expYear + ' years, ' + candidate.expMonth + ' months');
+                                $('#profile-location').text(candidate.location);
 
 
                             }).fail(() => {
@@ -366,23 +432,152 @@
 
                     }
 
-                    var getBasicDetails2 = async (id) => {
+                    var getExperiences = async (id) => {
 
-                        $.get(`@Url.Action("GetBasicDetails")/${id}`)
-                            .done((data) => {
+                        $.get(`@Url.Action("GetExperiences")/${id}`)
+                            .done((jobExperiences) => {
 
-                                $('#Email').val(data.email);
+                                if (jobExperiences.length > 0) {
+
+                                    $(jobExperiences).each((i, exp) => {
+
+                                        //--------------------END DATE--------------------//
+                                        const $spanEndDate = $('<span/>', { class: 'bg-gradient-gray', text: general.mnthYearName(exp.endMonth, exp.endYear) })
+                                        const $divLabel = $('<div/>', { class: 'time-label' });
+
+                                        $divLabel.append($spanEndDate);
+
+
+                                        //--------------------ICON--------------------//
+                                        const $icon = $('<i/>', { class: 'fas fa-business-time bg-gradient-cyan' });
+
+                                        //--------------------HEADER--------------------//
+                                        const $spanEdit = $('<span/>', { class: 'time', html: '<i class="fas fa-edit text-green"></i>' });
+                                        const $design = $('<h2/>', { class: 'timeline-header text-primary font-weight-bold', text: exp.designation });
+
+
+                                        //--------------------BODY--------------------//
+                                        const $Org = $('<span/>', { class: 'text-uppercase text-xs', text: exp.organization });
+                                        const $jobprofile = $('<small/>', { class: 'font-italic', text: exp.jobProfile });
+                                        const $divBody = $('<div/>', { class: 'timeline-body' });
+
+                                        $divBody.append($Org);
+                                        $divBody.append($('<br />'));
+                                        $divBody.append($jobprofile);
+
+
+                                        //--------------------FOOTER--------------------//
+                                        const $StartDate = $('<small/>', { class: 'font-italic', html: `<i class="fas fa-clock"></i> ${general.mnthYearName(exp.startMonth, exp.startYear)}` });
+                                        const $divFooter = $('<div/>', { class: 'timeline-footer' });
+
+
+                                        $divFooter.append($StartDate);
+
+
+                                        const $divitem = $('<div/>', { class: 'timeline-item' });
+                                        $divitem.append($spanEdit);
+                                        $divitem.append($design);
+                                        $divitem.append($divBody);
+                                        $divitem.append($divFooter);
+
+
+                                        const $divDesc = $('<div/>', { class: 'time-desc' });
+
+                                        $divDesc.append($icon);
+                                        $divDesc.append($divitem);
+
+
+                                        $('.timeline').prepend($divDesc);
+                                        $('.timeline').prepend($divLabel);
+
+
+                                        //<div class="time-label">
+                                        //    <span class="bg-gradient-gray">10 Feb. 2014</span>
+                                        //</div>
+                                        //<div class="time-desc">
+                                        //    <i class="fas fa-business-time bg-gradient-cyan"></i>
+                                        //    <div class="timeline-item">
+                                        //        <span class="time"><i class="fas fa-edit text-green"></i></span>
+                                        //        <h2 class="timeline-header text-primary font-weight-bold" >Designation</h2>
+                                        //        <div class="timeline-body">
+                                        //            <span class="text-uppercase text-xs">Organization</span>
+                                        //            <br />
+                                        //            <small class="font-italic">JobProfile</small>
+                                        //        </div>
+                                        //        <div class="timeline-footer">
+                                        //            <small class="font-italic">
+                                        //                <i class="fas fa-clock"></i> Jan, 2015
+                                        //            </small>
+                                        //        </div>
+                                        //    </div>
+                                        //</div>
+
+
+                                    });
+
+
+                                    $('.timeline').removeClass('d-none');
+                                }
+
 
                             }).fail(() => {
 
                             })
 
+                    }
+
+
+                    var addExp = (btn) => {
+                        $(btn).hide();
+                        $('#frmExperience').removeClass('d-none');
+                    }
+
+
+                    var saveExpereince = () => {
+
+                        var data = viewManager.getFormData('#frmExperience');
+
+                        data.CandidateId = id;
+
+                        if (data) {
+
+                            $.post('@Url.Action("Experience")', data)
+                                .done((res) => {
+
+                                    if (res.isSuccess) {
+
+                                        toastr.success('Saved', 'Saved successfully');
+                                        
+                                        $(btn).show();
+                                        $('#frmExperience').addClass('d-none');
+                                    }
+                                    else {
+                                        toastr.error('Error', 'Failed to save');
+                                    }
+
+
+                                }).fail(() => {
+
+                                    toastr.error('Error', 'Failed to save');
+
+                                })
+                        }
+                        else {
+                            toastr.error('Error', "Couldn't find data to save");
+                        }
+                    }
+
+                    var cancelExpereince = () => {                        
+                        $('#frmExperience').addClass('d-none');
                     }
 
                     return {
                         init: init,
                         resetBasic: resetBasic,
-                        saveBasic : saveBasic
+                        saveBasic: saveBasic,
+                        addExp: addExp,
+                        saveExpereince: saveExpereince,
+                        cancelExpereince : cancelExpereince
                     }
 
 

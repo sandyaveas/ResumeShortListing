@@ -35,7 +35,7 @@ namespace BO
 
 		public int EndMonth { get; set; }
 
-		public double CurrentSalary { get; set; }
+		public decimal CurrentSalary { get; set; }
 
 		public int NoticePeriod { get; set; }
 

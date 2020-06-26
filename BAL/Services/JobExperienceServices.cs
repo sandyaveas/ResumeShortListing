@@ -20,18 +20,44 @@ namespace BAL.Services
 
         public int Save(JobExperience jobExperience)
         {
+                       
+            jobExperience.LastUpdated = DateTime.Now;
+
             if (jobExperience.Id == 0)
             {
-                context.JobExperience.Add(jobExperience);                
-            }            
+                jobExperience.Created = DateTime.Now;
+
+                context.JobExperience.Add(jobExperience);
+            }
+            else
+            {
+                context.JobExperience.Update(jobExperience);                
+            }
+
+            
 
             return context.SaveChanges();            
         }
 
-
-        public List<JobExperience> GetList()
+        public List<JobExperience> GetList(int id)
         {
-            return context.JobExperience.ToList();
+            return context.JobExperience.Where(a => a.Id == id).ToList();
+        }
+
+        public async Task<List<JobExperience>> GetListAsync(int id)
+        {
+            return await context.JobExperience.Where(a => a.Id == id).ToListAsync();
+        }
+
+
+        public List<JobExperience> GetCandidateList(int CandidateId)
+        {
+            return context.JobExperience.Where(a => a.CandidateId == CandidateId).ToList();
+        }
+
+        public async Task<List<JobExperience>> GetCandidateListAsync(int CandidateId)
+        {
+            return await context.JobExperience.Where(a=> a.CandidateId == CandidateId).ToListAsync();
         }
 
         public JobExperience GetItem(int Id)

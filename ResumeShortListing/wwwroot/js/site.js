@@ -112,3 +112,88 @@ var viewManager = (() => {
     }
 
 })();
+
+
+
+var toastr = (() => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000        
+    });
+
+
+
+    var success = (title, message) => {
+        Toast.fire({
+            icon: 'success',
+            title: title != undefined ? title : '',
+            text: message != undefined ? message : '',            
+        });
+    }
+
+    var error = (title, message) => {
+        Toast.fire({
+            icon: 'error',
+            title: title != undefined ? title : '',
+            text: message != undefined ? message : '',
+        });
+    }
+
+    return {
+        success: success,
+        error: error
+    }
+
+})();
+
+
+var confirm = (() => {
+
+
+    var box = (title, message, callback) => {
+
+        Swal.fire({
+            title: title != undefined ? title : '',
+            text: message != undefined ? message : '',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+
+            if (result.value) {
+                if ($.isFunction(callback)) {
+                    callback();
+                }
+            }
+        })
+    }
+
+    return {
+        box: box
+    }
+
+})();
+
+
+var general = (() => {
+
+    var mnthYearName = (month, year, outputFormat) => {
+
+        if (outputFormat == undefined) { outputFormat = 'MMM - YYYY'; }
+
+        const mnthYear = month.toString().length == 1 ? '0' + month.toString() + year.toString() : month.toString() + year.toString();
+
+        return moment(mnthYear, 'MMYYYY').format(outputFormat);
+    }
+
+    return {
+        mnthYearName: mnthYearName
+    }
+    
+
+})();
