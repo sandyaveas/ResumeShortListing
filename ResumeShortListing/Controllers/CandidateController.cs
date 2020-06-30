@@ -44,6 +44,14 @@ namespace ResumeShortListing.Controllers
         }
 
 
+        public ActionResult GetExperience(int id)
+        {
+            var jobExperience = _appServices.JobExperience.GetItem(id);
+
+            return Json(jobExperience);
+        }
+
+
 
         [HttpPost]
         public ActionResult BasicDetails(Candidate candidate)
@@ -61,12 +69,26 @@ namespace ResumeShortListing.Controllers
 
 
         [HttpPost]
-        public ActionResult Experience(JobExperience jobExperience)
+        public ActionResult SaveExperience(JobExperience jobExperience)
         {
             bool isSuccess = false;
 
 
             if (_appServices.JobExperience.Save(jobExperience) > 0)
+            {
+                isSuccess = true;
+            }
+
+            return Json(new { isSuccess });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteExperience(int expId)
+        {
+            bool isSuccess = false;
+
+
+            if (_appServices.JobExperience.Delete(expId) > 0)
             {
                 isSuccess = true;
             }

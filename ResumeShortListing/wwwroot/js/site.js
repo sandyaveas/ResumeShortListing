@@ -10,7 +10,8 @@ var viewManager = (() => {
         eleContainer: '',
         placeholder: true,
         mandatorySign: false,
-        detailView: false
+        detailView: false,
+        textAreaCounter: true,
     }
 
 
@@ -24,25 +25,50 @@ var viewManager = (() => {
 
     var alterControls = () => {
 
-        const eleContainer = config.eleContainer;
+
+        const eleContainer = config.eleContainer.split(',');
 
         if ($(eleContainer).length > 0) {
 
-            $(eleContainer + ' [data-cntrl]').each((i, cntrl) => {
+            $(eleContainer).each((i, container) => {
 
-                var label = $(cntrl).find('label');
-                var input = $(cntrl).find('input');
+                $(container + ' [data-cntrl]').each((i, cntrl) => {
 
-                //Placeholder
-                if (config.placeholder) {
+                    const label = $(cntrl).find('label');
+                    const input = $(cntrl).find('input');
+                    const textarea = $(cntrl).find('textarea');
 
-                    if (label.length > 0 && input.length > 0) {
-                        input.attr('placeholder', label.text());
+                    //Placeholder
+                    if (config.placeholder) {
+
+                        if (label.length > 0) {
+
+                            var inputCntrl;
+
+                            if (input.length > 0) {
+                                inputCntrl = input;
+                            }
+                            else if (textarea.length > 0) {
+                                inputCntrl = textarea
+                            }
+
+                            inputCntrl.attr('placeholder', label.text());
+                        }
                     }
-                }
 
+                    //Apply TextArea Counter
+                    if (config.textAreaCounter && textarea.length > 0) {
+                        $('<small/>', { class: 'textcounter float-right text-info', text: `${textarea.attr('maxlength')} Character(s) left` }).insertAfter(textarea);
+                    }
+
+
+                });
             });
+        }
 
+
+        if (config.textAreaCounter) {
+            applyTextCounter(eleContainer);
         }
     }
 
@@ -53,15 +79,19 @@ var viewManager = (() => {
 
             const data = {};
 
-            $(eleContainer + ' [data-cntrl] input[name]').each((i, cntrl) => {
+            var eleCon = eleContainer + ' [data-cntrl]'
 
-                //var $input = $(cntrl).find('input[name]');
+            $(`${eleCon} input[type=text], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
 
                 data[$(cntrl).attr('name')] = $(cntrl).val();
             });
 
-            $(eleContainer + ' [data-cntrl-hdn] input[type=hidden]').each((i, hdn) => {
-                data[$(hdn).attr('name')] = $(hdn).val();
+            $(`${eleCon} input[type=checkbox]`).each((i, cntrl) => {
+
+                var name = $(cntrl).attr('name').charAt(0).toLowerCase() + $(cntrl).attr('name').slice(1);
+
+                data[name] = $(cntrl).prop('checked');
+
             });
 
             return data;
@@ -76,27 +106,92 @@ var viewManager = (() => {
 
         if ($(eleContainer).length > 0 && data) {
 
-           
+            const eleCon = eleContainer + ' [data-cntrl]'
 
-            $(eleContainer + ' [data-cntrl] input[name]').each((i, cntrl) => {                
+            $(`${eleCon} input[type=text], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
 
                 var name = $(cntrl).attr('name').charAt(0).toLowerCase() + $(cntrl).attr('name').slice(1);
 
                 $(cntrl).val(data[name]);
             });
 
-            $(eleContainer + ' [data-cntrl-hdn] input[type=hidden]').each((i, cntrl) => {
+            $(`${eleCon} input[type=checkbox]`).each((i, cntrl) => {
 
                 var name = $(cntrl).attr('name').charAt(0).toLowerCase() + $(cntrl).attr('name').slice(1);
+                
+                $(cntrl).prop('checked', data[name]);
 
-                $(cntrl).val(data[name]);
-
-                //data[$(hdn).attr('name')] = $(hdn).val();
             });
-
-            
         }
-        
+
+    }
+
+    var resetFormData = (eleContainer, resetValidate) => {
+
+        if ($(eleContainer).length > 0) {
+
+            const eleCon = eleContainer + ' [data-cntrl]'
+
+            $(`${eleCon} input[name], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
+
+                $(cntrl).val('');
+
+            });
+
+
+            if (resetValidate) {
+
+                resetValidator(eleContainer);
+            }
+        }
+
+    }
+
+    var applyValidate = (options) => {
+
+        $(options.eleContainer).validate({
+            rules: options.rules,
+            messages: options.messages,
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+    }
+
+    var resetValidator = (eleContainer) => {
+
+        const validator = $(eleContainer).validate();
+
+        $(eleContainer).find('.is-invalid').removeClass('is-invalid');
+        validator.resetForm();
+    }
+
+
+    var applyTextCounter = (eleContainer) => {
+
+        $(eleContainer).each((i, container) => {
+
+            $(container).on('keydown', 'textarea', function (event) {
+                const textarea = event.currentTarget;
+
+                if ($(textarea).next('.textcounter').length > 0) {
+                    const maxLength = $(textarea).attr('maxlength');
+
+                    const textareaLength = $(textarea).val().length;
+
+                    $(textarea).next('.textcounter').text(`${maxLength - textareaLength} Character(s) left`);
+                }
+            });
+        });
     }
 
 
@@ -108,7 +203,10 @@ var viewManager = (() => {
     return {
         init: init,
         getFormData: getFormData,
-        setFormData: setFormData
+        setFormData: setFormData,
+        resetFormData: resetFormData,
+        applyValidate: applyValidate,
+        resetValidator: resetValidator
     }
 
 })();
@@ -121,7 +219,7 @@ var toastr = (() => {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 3000        
+        timer: 3000
     });
 
 
@@ -130,7 +228,7 @@ var toastr = (() => {
         Toast.fire({
             icon: 'success',
             title: title != undefined ? title : '',
-            text: message != undefined ? message : '',            
+            text: message != undefined ? message : '',
         });
     }
 
@@ -194,6 +292,6 @@ var general = (() => {
     return {
         mnthYearName: mnthYearName
     }
-    
+
 
 })();

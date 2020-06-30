@@ -49,7 +49,7 @@
 
                         <h3 id="profile-name" class="profile-username text-center"></h3>
 
-                        <p id="profile-designation" class="text-muted text-center">Software Engineer</p>
+                        <p id="profile-designation" class="text-muted text-center"></p>
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
@@ -98,7 +98,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div data-cntrl-hdn>
+                            <div data-cntrl>
                                 <input id="Id" name="Id" type="hidden">
                                 <input id="Created" name="Created" type="hidden">
                                 <input id="LastUpdated" name="LastUpdated" type="hidden">
@@ -143,8 +143,8 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="button" value="Save" class="btn btn-success" onclick="candManager.saveBasic()" />
-                            <input type="button" value="Cancel" class="btn btn-secondary" />
+                            <input type="button" value="Save" class="btn btn-success saveBasic" />
+                            <input type="button" value="Cancel" class="btn btn-secondary cancelBasic" />
                         </div>
                     </div>
                 </form>
@@ -157,137 +157,144 @@
                                 Experiences
                             </h5>
                             <div class="col-lg-4">
-                                <a href="javascript:void(0);" class="text-primary float-right" onclick="candManager.addExp(this)">Add <i class="fas fa-plus-circle"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-sm float-right addExp">Add <i class="fas fa-plus-circle"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
 
-                        
+
 
                         <div class="timeline d-none">
 
-
-
-                            @*<div class="time-label">
-                                    <span class="bg-gradient-gray">10 Feb. 2014</span>
-                                </div>
-                                <div class="time-desc">
-                                    <i class="fas fa-business-time bg-gradient-cyan"></i>
-                                    <div class="timeline-item">
-                                        <span class="time"><i class="fas fa-edit text-green"></i></span>
-                                        <h2 class="timeline-header text-primary font-weight-bold" >Designation</h2>
-                                        <div class="timeline-body">
-                                            <span class="text-uppercase text-xs">Organization</span>
-                                            <br />
-                                            <small class="font-italic">JobProfile</small>
-                                        </div>
-                                        <div class="timeline-footer">
-                                            <small class="font-italic">
-                                                <i class="fas fa-clock"></i> Jan, 2015
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>*@
-
-                            <div class="time-label">
+                            <div class="time-label start-point">
                                 <i class="fas fa-clock bg-gradient-teal"></i>
                             </div>
+                        </div>
 
+                        <div class="modal fade" id="modal-experience">
+                            <!-- .modal-dialog -->
+                            <div class="modal-dialog modal-lg">
+                                <!-- .modal-content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Add Experience</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="frmExperience">
+                                            <div class="row">
+                                                <div data-cntrl>
+                                                    <input id="Id" name="Id" type="hidden">
+                                                    <input id="CandidateId" name="CandidateId" type="hidden">
+                                                    <input id="Created" name="Created" type="hidden">
+                                                    <input id="LastUpdated" name="LastUpdated" type="hidden">
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="Designation" class="control-label">Designation</label>
+                                                        <input name="Designation" id="Designation" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="Organization" class="control-label">Organization</label>
+                                                        <input name="Organization" id="Organization" type="text" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+
+                                                    <div class="form-group form-check" data-cntrl>
+
+
+                                                        <label class="control-label">&nbsp;</label>
+                                                        <br />
+
+                                                        <div class="icheck-primary d-inline">
+                                                            <input class="form-check-input" id="IsCurrent" name="IsCurrent" type="checkbox" />
+                                                            <label for="IsCurrent"> Is Current</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="StartYear" class="control-label">Start Year</label>
+                                                        <input type="number" id="StartYear" name="StartYear" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="StartMonth" class="control-label">Start Month</label>
+                                                        <input type="number" id="StartMonth" name="StartMonth" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="EndYear" class="control-label">End Year</label>
+                                                        <input type="number" id="EndYear" name="EndYear" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="EndMonth" class="control-label">End Month</label>
+                                                        <input type="number" id="EndMonth" name="EndMonth" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="CurrentSalary" class="control-label">Salary</label>
+                                                        <input type="number" id="CurrentSalary" name="CurrentSalary" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="NoticePeriod" class="control-label">Notice Period</label>
+                                                        <input type="number" id="NoticePeriod" name="NoticePeriod" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="JobProfile" class="control-label">Job Description</label>
+                                                        <textarea id="JobProfile" name="JobProfile" class="form-control" rows="4" maxlength="1000"></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="form-group">
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <input type="button" value="Save Changes" class="btn btn-success saveExp" />
+                                        <input type="button" value="Cancel" data-dismiss="modal" class="btn btn-secondary" />
+
+
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
                         </div>
 
 
 
-
-                        <form id="frmExperience" class="d-none">
-                            <div class="row">
-                                <div data-cntrl-hdn>
-                                    <input id="Id" name="Id" type="hidden">
-                                    <input id="CandidateId" name="CandidateId" type="hidden">
-                                    <input id="Created" name="Created" type="hidden">
-                                    <input id="LastUpdated" name="LastUpdated" type="hidden">
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="Designation" class="control-label">Designation</label>
-                                        <input name="Designation" id="Designation" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="Organization" class="control-label">Organization</label>
-                                        <input name="Organization" id="Organization" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-
-                                    <div class="form-group form-check" data-cntrl>
-
-
-                                        <label class="control-label">&nbsp;</label>
-                                        <br />
-
-                                        <div class="icheck-primary d-inline">
-                                            <input class="form-check-input" id="IsCurrent" name="IsCurrent" type="checkbox" />
-                                            <label for="IsCurrent"> Is Current</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="StartYear" class="control-label">Start Year</label>
-                                        <input type="number" id="StartYear" name="StartYear" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="StartMonth" class="control-label">Start Month</label>
-                                        <input type="number" id="StartMonth" name="StartMonth" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="EndYear" class="control-label">End Year</label>
-                                        <input type="number" id="EndYear" name="EndYear" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="EndMonth" class="control-label">End Month</label>
-                                        <input type="number" id="EndMonth" name="EndMonth" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="CurrentSalary" class="control-label">Salary</label>
-                                        <input type="number" id="CurrentSalary" name="CurrentSalary" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="NoticePeriod" class="control-label">Notice Period</label>
-                                        <input type="number" id="NoticePeriod" name="NoticePeriod" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group" data-cntrl>
-                                        <label for="JobProfile" class="control-label">Describe Profile</label>
-                                        <textarea id="JobProfile" name="JobProfile" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="form-group">
-                                <input type="button" value="Save" class="btn btn-success" onclick="candManager.saveExpereince()" />
-                                <input type="button" value="Cancel" class="btn btn-secondary" onclick="candManager.cancelExpereince()" />
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-experience">
+                Launch Modal
+            </button>*@
+
+
 
         @section Scripts {
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -298,51 +305,63 @@
                 var id = 0;
 
 
-                $('#frmCandidate').validate({
-                    rules: {
-                        //email: {
-                        //    required: true,
-                        //    email: true,
-                        //},
-                        //password: {
-                        //    required: true,
-                        //    minlength: 5
-                        //},
-                        Location: {
-                            required: true
-                        },
-                    },
-                    messages: {
-                        //email: {
-                        //required: "Please enter a email address",
-                        //email: "Please enter a vaild email address"
-                        //},
-                        //password: {
-                        //required: "Please provide a password",
-                        //minlength: "Your password must be at least 5 characters long"
-                        //},
-                        Location: {
-                            required: "Please enter the Location"
-                        },
-                    },
-                    errorElement: 'span',
-                    errorPlacement: function (error, element) {
-                        error.addClass('invalid-feedback');
-                        element.closest('.form-group').append(error);
-                    },
-                    highlight: function (element, errorClass, validClass) {
-                        $(element).addClass('is-invalid');
-                    },
-                    unhighlight: function (element, errorClass, validClass) {
-                        $(element).removeClass('is-invalid');
-    }
-                });
-
-
-
                 $(document).ready(() => {
 
                     candManager.init();
+
+                    $('.saveBasic').click(() => {
+                        candManager.saveBasic();
+                    });
+
+                    $('.addExp').click(() => {
+                        candManager.addExp();
+                    });
+
+                    $('.saveExp').click(() => {
+                        candManager.saveExp();
+                    });
+
+                    $('#modal-experience [data-dismiss]').click(() => {
+                        candManager.cancelExp();
+                    });
+
+                    $('.cancelBasic').click(() => {
+                        candManager.cancelBasic();
+                    });
+
+
+
+                    //$('textarea').keypress(function (event) {
+
+                    //    if ($(event.currentTarget).next('.textcounter').length > 0) {
+                    //        const maxLength = $(event.currentTarget).next('.textcounter').data('maxlength');
+
+                    //        const textareaLength = $(event.currentTarget).val().length;
+
+                    //        $(event.currentTarget).next('.textcounter').text(`${maxLength - textareaLength} Character(s) left`);
+                    //    }
+                    //});
+
+                    //$('textarea').keyup(function (event) {
+
+                    //    if ($(event.currentTarget).next('.textcounter').length > 0) {
+                    //        const maxLength = $(event.currentTarget).next('.textcounter').data('maxlength');
+
+                    //        const textareaLength = $(event.currentTarget).val().length;
+
+                    //        $(event.currentTarget).next('.textcounter').text(`${maxLength - textareaLength} Character(s) left`);
+                    //    }
+                    //});
+
+
+
+
+                    $('#IsCurrent').change(() => {
+
+                        candManager.isCurrentExp();
+
+                    });
+
 
                 });
 
@@ -353,7 +372,7 @@
                     var init = async () => {
 
                         viewManager.init({
-                            eleContainer: '#frmCandidate'
+                            eleContainer: '#frmCandidate, #frmExperience'
                         });
 
 
@@ -364,43 +383,194 @@
                             await loadData(id);
                         }
 
+                        //--------------CANDIDATE VALIDATION--------------//
+                        viewManager.applyValidate({
+                            eleContainer: '#frmCandidate',
+                            rules: {
+                                Name: { required: true, maxlength: 1000 },
+                                Email: { required: true, email: true, maxlength: 100 },
+                                Mobile: { required: true, maxlength: 15 }
+                            },
+                            messages: {
+                                Name: { required: "Please provide a Name", maxlength: "Your name must not exceed 1000 characters long" },
+                                Email: { required: "Please enter a email address", email: "Please enter a valid email address", maxlength: "Your name must not exceed 100 characters long" },
+                                Mobile: { required: "Please enter a Mobile number", maxlength: "Your name must not exceed 15 characters long" }
+                            }
+                        });
+
+
+                        //--------------EXPERIENCE VALIDATION--------------//
+                        viewManager.applyValidate({
+                            eleContainer: '#frmExperience',
+                            rules: {
+                                Designation: { required: true, maxlength: 255 },
+                                Organization: { required: true, maxlength: 1000 },
+                                StartYear: { required: true, min: 1900, max: new Date().getFullYear() },
+                                StartMonth: { required: true, min: 0, max: 12 },
+                                EndYear: { required: true, min: 1900, max: new Date().getFullYear() },
+                                EndMonth: { required: true, min: 0, max: 12}
+                            },
+                            messages: {
+                                Designation: { required: "Please enter a Designation", maxlength: "Your name must not exceed 255 characters long" },
+                                Organization: { required: "Please enter a Organization", email: "Please enter a valid email address", maxlength: "Your name must not exceed 1000 characters long" },
+                                StartYear: { required: "Please enter Start Year", min: `Start Year cannot be less than 1900`, max: `Start Year cannot be greater than ${new Date().getFullYear()}` },
+                                StartMonth: { required: "Please enter Start Month", min: `Start Month cannot be less than 0`, max: `Start Month cannot be greater than 12` },
+                                EndYear: { required: "Please enter End Year", min: `End Year cannot be less than 1900`, max: `End Year cannot be greater than ${new Date().getFullYear()}` },
+                                EndMonth: { required: "Please enter End Month", min : `End Month cannot be less than 0`, max: `End Month cannot be greater than 12` }
+                            }
+                        });
+
                     }
 
 
 
 
-                    var resetBasic = () => {
 
-
-                    }
 
                     var saveBasic = () => {
 
-                        var data = viewManager.getFormData('#frmCandidate');
 
-                        if (data) {
 
-                            $.post('@Url.Action("BasicDetails")', data)
-                                .done((res) => {
+                        if ($('#frmCandidate').valid()) {
 
-                                    if (res.isSuccess) {
+                            var data = viewManager.getFormData('#frmCandidate');
 
-                                        toastr.success('Saved', 'Saved successfully');
-                                    }
-                                    else {
+                            if (data) {
+
+                                $.post('@Url.Action("BasicDetails")', data)
+                                    .done((res) => {
+
+                                        if (res.isSuccess) {
+
+                                            toastr.success('Saved', 'Saved successfully');
+                                        }
+                                        else {
+                                            toastr.error('Error', 'Failed to save');
+                                        }
+
+                                    }).fail(() => {
+
                                         toastr.error('Error', 'Failed to save');
-                                    }
 
-                                }).fail(() => {
-
-                                    toastr.error('Error', 'Failed to save');
-
-                                })
-                        }
-                        else {
-                            toastr.error('Error', "Couldn't find data to save");
+                                    })
+                            }
+                            else {
+                                toastr.error('Error', "Couldn't find data to save");
+                            }
                         }
                     }
+
+                    var cancelBasic = () => {
+
+                    }
+
+
+
+
+
+                    var addExp = (btn) => {
+
+                        viewManager.resetFormData('#frmExperience', true);
+
+                        $('#IsCurrent').prop('checked', false)
+                         isCurrentExp();
+
+
+                        $('#modal-experience').modal('show');
+
+
+                    }
+
+                    var editExp = (expId) => {
+
+
+                        viewManager.resetFormData('#frmExperience', true);
+
+                        $.get(`@Url.Action("GetExperience")/${expId}`)
+                            .done((jobExp) => {
+
+                                viewManager.setFormData('#frmExperience', jobExp);
+
+                                if (jobExp.isCurrent) {
+                                    isCurrentExp();
+                                }
+
+                                $('#modal-experience').modal('show');
+
+                            }).fail(() => {
+
+
+                            });
+                    }
+
+
+                    var saveExp = () => {
+
+                        if ($('#frmExperience').valid()) {
+
+                            var data = viewManager.getFormData('#frmExperience');
+
+                            data.CandidateId = id;
+
+                            if (data) {
+
+                                $.post('@Url.Action("SaveExperience")', data)
+                                    .done((res) => {
+
+                                        if (res.isSuccess) {
+
+                                            toastr.success('Saved', 'Saved successfully');
+
+                                            getExperiences(id);
+
+                                            $('#modal-experience').modal('hide');
+                                        }
+                                        else {
+                                            toastr.error('Error', 'Failed to save');
+                                        }
+
+
+                                    }).fail(() => {
+
+                                        toastr.error('Error', 'Failed to save');
+
+                                    });
+                            }
+                            else {
+                                toastr.error('Error', "Couldn't find data to save");
+                            }
+                        }
+                    }
+
+                    var deleteExp = (expId) => {
+
+                        var data = { expId: expId };
+
+                        $.post('@Url.Action("DeleteExperience")', data)
+                            .done((res) => {
+
+                                if (res.isSuccess) {
+
+                                    toastr.success('Delete', 'Deleted successfully');
+
+                                    getExperiences(id);
+                                }
+                                else {
+                                    toastr.error('Error', 'Failed to delete');
+                                }
+
+
+                            }).fail(() => {
+
+                                toastr.error('Error', 'Failed to delete');
+
+                            });
+                    }
+
+                    var cancelExp = () => {
+                        //$('.addExp').show();
+                    }
+
 
 
                     var loadData = async (id)=> {
@@ -437,12 +607,20 @@
                         $.get(`@Url.Action("GetExperiences")/${id}`)
                             .done((jobExperiences) => {
 
+
+
                                 if (jobExperiences.length > 0) {
+
+                                    $('.timeline').children().not('.start-point').remove();
 
                                     $(jobExperiences).each((i, exp) => {
 
+
                                         //--------------------END DATE--------------------//
-                                        const $spanEndDate = $('<span/>', { class: 'bg-gradient-gray', text: general.mnthYearName(exp.endMonth, exp.endYear) })
+                                        const $spanEndDate = $('<span/>', {
+                                            class: 'bg-gradient-gray',
+                                            html: '&nbsp;' + (exp.isCurrent ?  'Till Date' :  general.mnthYearName(exp.endMonth, exp.endYear)) + ' &nbsp;'
+                                        })
                                         const $divLabel = $('<div/>', { class: 'time-label' });
 
                                         $divLabel.append($spanEndDate);
@@ -452,7 +630,19 @@
                                         const $icon = $('<i/>', { class: 'fas fa-business-time bg-gradient-cyan' });
 
                                         //--------------------HEADER--------------------//
-                                        const $spanEdit = $('<span/>', { class: 'time', html: '<i class="fas fa-edit text-green"></i>' });
+                                        const $actionDelete = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'time',
+                                            html: `<i class="fas fa-trash text-danger" title="Delete"></i>`,
+                                            onclick: `candManager.deleteExp(${exp.id})`
+                                        });
+
+                                        const $actionEdit = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'time',
+                                            html: `<i class="fas fa-edit text-green" title="Edit"></i>`,
+                                            onclick: `candManager.editExp(${exp.id})`
+                                        });
                                         const $design = $('<h2/>', { class: 'timeline-header text-primary font-weight-bold', text: exp.designation });
 
 
@@ -467,7 +657,11 @@
 
 
                                         //--------------------FOOTER--------------------//
-                                        const $StartDate = $('<small/>', { class: 'font-italic', html: `<i class="fas fa-clock"></i> ${general.mnthYearName(exp.startMonth, exp.startYear)}` });
+                                        const $StartDate = $('<small/>', {
+                                            title: "Start Month - Year",
+                                            class: 'font-italic',
+                                            html: `<i class="fas fa-clock" ></i> ${general.mnthYearName(exp.startMonth, exp.startYear)}`
+                                        });
                                         const $divFooter = $('<div/>', { class: 'timeline-footer' });
 
 
@@ -475,7 +669,8 @@
 
 
                                         const $divitem = $('<div/>', { class: 'timeline-item' });
-                                        $divitem.append($spanEdit);
+                                        $divitem.append($actionDelete);
+                                        $divitem.append($actionEdit);
                                         $divitem.append($design);
                                         $divitem.append($divBody);
                                         $divitem.append($divFooter);
@@ -489,30 +684,6 @@
 
                                         $('.timeline').prepend($divDesc);
                                         $('.timeline').prepend($divLabel);
-
-
-                                        //<div class="time-label">
-                                        //    <span class="bg-gradient-gray">10 Feb. 2014</span>
-                                        //</div>
-                                        //<div class="time-desc">
-                                        //    <i class="fas fa-business-time bg-gradient-cyan"></i>
-                                        //    <div class="timeline-item">
-                                        //        <span class="time"><i class="fas fa-edit text-green"></i></span>
-                                        //        <h2 class="timeline-header text-primary font-weight-bold" >Designation</h2>
-                                        //        <div class="timeline-body">
-                                        //            <span class="text-uppercase text-xs">Organization</span>
-                                        //            <br />
-                                        //            <small class="font-italic">JobProfile</small>
-                                        //        </div>
-                                        //        <div class="timeline-footer">
-                                        //            <small class="font-italic">
-                                        //                <i class="fas fa-clock"></i> Jan, 2015
-                                        //            </small>
-                                        //        </div>
-                                        //    </div>
-                                        //</div>
-
-
                                     });
 
 
@@ -527,57 +698,47 @@
                     }
 
 
-                    var addExp = (btn) => {
-                        $(btn).hide();
-                        $('#frmExperience').removeClass('d-none');
-                    }
+                    var isCurrentExp = () => {
+                        if ($('#IsCurrent').prop('checked')) {
 
+                            $('#EndYear').closest('[data-cntrl]').addClass('d-none');
+                            $('#EndMonth').closest('[data-cntrl]').addClass('d-none');
 
-                    var saveExpereince = () => {
+                            $('#EndYear').rules('remove');
+                            $('#EndMonth').rules('remove');
 
-                        var data = viewManager.getFormData('#frmExperience');
+                            $('#EndYear').val('');
+                            $('#EndMonth').val('');
 
-                        data.CandidateId = id;
+                            $('#EndYear').removeClass('is-invalid');
+                            $('#EndMonth').removeClass('is-invalid');
 
-                        if (data) {
-
-                            $.post('@Url.Action("Experience")', data)
-                                .done((res) => {
-
-                                    if (res.isSuccess) {
-
-                                        toastr.success('Saved', 'Saved successfully');
-                                        
-                                        $(btn).show();
-                                        $('#frmExperience').addClass('d-none');
-                                    }
-                                    else {
-                                        toastr.error('Error', 'Failed to save');
-                                    }
-
-
-                                }).fail(() => {
-
-                                    toastr.error('Error', 'Failed to save');
-
-                                })
                         }
                         else {
-                            toastr.error('Error', "Couldn't find data to save");
-                        }
-                    }
 
-                    var cancelExpereince = () => {                        
-                        $('#frmExperience').addClass('d-none');
+                            $('#EndYear').closest('[data-cntrl]').removeClass('d-none');
+                            $('#EndMonth').closest('[data-cntrl]').removeClass('d-none');
+
+                            $("#EndYear").rules("add", { required: true, messages: { required: "Please enter End Month" } });
+                            $("#EndYear").rules("add", { min: 1900, messages: { min: "Start Year cannot be less than 1900" } });
+                            $("#EndYear").rules("add", { max: new Date().getFullYear(), messages: { max: `End Month cannot be greater than ${new Date().getFullYear()}` } });
+
+                            $("#EndMonth").rules("add", { required: true, messages: { required: "Please enter End Month" } });
+                            $("#EndMonth").rules("add", { min: 0, messages: { min: "End Month cannot be less than 0" } });
+                            $("#EndMonth").rules("add", { max: 12, messages: { max: "End Month cannot be greater than 12" } });
+                        }
                     }
 
                     return {
                         init: init,
-                        resetBasic: resetBasic,
                         saveBasic: saveBasic,
+                        cancelBasic : cancelBasic,
                         addExp: addExp,
-                        saveExpereince: saveExpereince,
-                        cancelExpereince : cancelExpereince
+                        editExp: editExp,
+                        deleteExp: deleteExp,
+                        saveExp: saveExp,
+                        cancelExp: cancelExp,
+                        isCurrentExp:isCurrentExp
                     }
 
 

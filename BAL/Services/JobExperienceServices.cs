@@ -57,7 +57,11 @@ namespace BAL.Services
 
         public async Task<List<JobExperience>> GetCandidateListAsync(int CandidateId)
         {
-            return await context.JobExperience.Where(a=> a.CandidateId == CandidateId).ToListAsync();
+            return await context.JobExperience
+                .Where(a=> a.CandidateId == CandidateId)
+                .OrderBy(a=>  a.StartYear)
+                .ThenBy(a=> a.StartMonth)
+                .ToListAsync();
         }
 
         public JobExperience GetItem(int Id)
