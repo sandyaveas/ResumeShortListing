@@ -62,7 +62,7 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    margin-bottom: 55px;
 }
 
 .footer {
@@ -93,4 +93,23 @@ body {
 
 .form-check {    
     padding-left: 0px;
+}
+
+[class*=icheck-]{
+    padding-right : 15px;
+}
+
+    [class*=icheck-] > label {
+        color: #5d5959;
+        font-weight: 400 !important;
+    }
+
+    [class*=icheck-] > input:first-child + label::before {        
+        border-radius: 3px;        
+    }
+
+
+.back-to-top {
+    bottom: 4rem;
+    border-radius: 50%;
 }

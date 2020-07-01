@@ -25,10 +25,37 @@ namespace ResumeShortListing.Controllers
 
         public ActionResult Profile()
         {
+            FillDropDowns();
+
             return View();
         }
 
-        
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                Candidate candidate = _appServices.Candidate.GetItem(id);
+
+                if (candidate is Candidate)
+                {
+                    FillDropDowns();
+
+                    return View("Profile", candidate);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+
+
+        //---------------------BASIC DETAILS-------------------------//
         public async Task<ActionResult> GetBasicDetails(int id)
         {
             var candidate = await _appServices.Candidate.GetItemAsync(id);
@@ -36,6 +63,22 @@ namespace ResumeShortListing.Controllers
             return Json(candidate);
         }
 
+        [HttpPost]
+        public ActionResult SaveBasicDetails(Candidate candidate)
+        {
+            bool isSuccess = false;
+
+
+            if (_appServices.Candidate.Save(candidate) > 0)
+            {
+                isSuccess = true;
+            }
+
+            return Json(new { isSuccess });
+        }
+
+
+        //---------------------EXPERIENCES-------------------------//
         public async Task<ActionResult> GetExperiences(int id)
         {
             var jobExperiences = await _appServices.JobExperience.GetCandidateListAsync(id);
@@ -49,23 +92,7 @@ namespace ResumeShortListing.Controllers
             var jobExperience = _appServices.JobExperience.GetItem(id);
 
             return Json(jobExperience);
-        }
-
-
-
-        [HttpPost]
-        public ActionResult BasicDetails(Candidate candidate)
-        {
-            bool isSuccess = false;
-
-
-            if (_appServices.Candidate.Save(candidate) > 0)
-            {
-                isSuccess = true;
-            }
-
-            return Json(new { isSuccess });
-        }
+        }       
 
 
         [HttpPost]
@@ -97,90 +124,76 @@ namespace ResumeShortListing.Controllers
         }
 
 
-        public ActionResult Edit(int id)
+        //---------------------SKILLS-------------------------//
+        public async Task<ActionResult> GetSkills(int id)
         {
-            try
-            {
-                Candidate candidate = _appServices.Candidate.GetItem(id);
+            var skills = await _appServices.Skill.GetCandidateListAsync(id);
 
-                if (candidate is Candidate)
-                {
-                    return View("Profile", candidate);
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
+            return Json(skills);
+        }
 
+
+        public ActionResult GetSkill(int id)
+        {
+            var skill = _appServices.Skill.GetItem(id);
+
+            return Json(skill);
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Candidate candidate)
+        public ActionResult SaveSkill(Skill skill)
         {
-            try
-            {
+            bool isSuccess = false;
 
-                if (_appServices.Candidate.Save(candidate) > 0)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    return View("Profile", candidate);
-                }
 
-            }
-            catch
+            if (_appServices.Skill.Save(skill) > 0)
             {
-                return View("Profile", candidate);
+                isSuccess = true;
             }
+
+            return Json(new { isSuccess });
         }
-
-
-
-        public ActionResult Details(int id)
-        {
-            try
-            {
-                Candidate candidate = _appServices.Candidate.GetItem(id);
-
-                if (candidate is Candidate)
-                {
-                    return View("Profile", candidate);
-                }
-                else
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            catch
-            {
-                return RedirectToAction(nameof(Index));
-            }
-        }
-
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete()
+        public ActionResult DeleteSkill(int skillId)
         {
-            try
-            {
+            bool isSuccess = false;
 
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (_appServices.Skill.Delete(skillId) > 0)
             {
-                return View();
+                isSuccess = true;
             }
+
+            return Json(new { isSuccess });
+        }
+
+
+        private void FillDropDowns() 
+        {
+            //------------------Blood Group-----------------//
+            Dictionary<string, string> dicBloodGroup = new Dictionary<string, string>();
+            dicBloodGroup.Add("A+", "A+");
+            dicBloodGroup.Add("A-", "A-");
+            dicBloodGroup.Add("B+", "B+");
+            dicBloodGroup.Add("B-", "B-");
+            dicBloodGroup.Add("O+", "O+");
+            dicBloodGroup.Add("O-", "O-");
+            dicBloodGroup.Add("AB+", "AB+");
+            dicBloodGroup.Add("AB-", "AB-");
+            ViewBag.BloodGroup = dicBloodGroup;
+
+            //------------------Martial Status-----------------//
+            Dictionary<string, string> dicMartialStatus = new Dictionary<string, string>();
+            dicMartialStatus.Add("U", "Single/UnMarried");
+            dicMartialStatus.Add("M", "Married");
+            dicMartialStatus.Add("W", "Widowed");
+            dicMartialStatus.Add("D", "Divorced");
+            dicMartialStatus.Add("S", "Seperated");
+            dicMartialStatus.Add("O-", "Other");
+            ViewBag.MartialStatus = dicMartialStatus;
+
         }
     }
-}
+};

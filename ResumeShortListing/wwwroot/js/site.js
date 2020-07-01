@@ -52,7 +52,9 @@ var viewManager = (() => {
                                 inputCntrl = textarea
                             }
 
-                            inputCntrl.attr('placeholder', label.text());
+                            if (inputCntrl) {
+                                inputCntrl.attr('placeholder', label.text());
+                            }
                         }
                     }
 
@@ -81,7 +83,7 @@ var viewManager = (() => {
 
             var eleCon = eleContainer + ' [data-cntrl]'
 
-            $(`${eleCon} input[type=text], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
+            $(`${eleCon} input[type=text], ${eleCon} input[type=email], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
 
                 data[$(cntrl).attr('name')] = $(cntrl).val();
             });
@@ -108,7 +110,7 @@ var viewManager = (() => {
 
             const eleCon = eleContainer + ' [data-cntrl]'
 
-            $(`${eleCon} input[type=text], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
+            $(`${eleCon} input[type=text], ${eleCon} input[type=email], ${eleCon} input[type=number], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
 
                 var name = $(cntrl).attr('name').charAt(0).toLowerCase() + $(cntrl).attr('name').slice(1);
 
@@ -132,7 +134,7 @@ var viewManager = (() => {
 
             const eleCon = eleContainer + ' [data-cntrl]'
 
-            $(`${eleCon} input[name], ${eleCon} input[type=hidden], ${eleCon} textarea[name]`).each((i, cntrl) => {
+            $(`${eleCon} input[name], ${eleCon} input[type=email], ${eleCon} input[type=number], ${eleCon}, ${eleCon} textarea[name]`).each((i, cntrl) => {
 
                 $(cntrl).val('');
 
@@ -295,3 +297,11 @@ var general = (() => {
 
 
 })();
+
+
+$('.back-to-top').click(() => {
+
+    $('html, body').animate({
+        scrollTop: '0'
+    }, 1000);
+})

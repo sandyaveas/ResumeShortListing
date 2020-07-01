@@ -10,6 +10,15 @@
     .time-label {
         font-size: 12px;
     }
+
+    #divProfileMenu {
+        position: sticky;
+        top: 15px;
+    }
+
+    .scrollspy-example {
+        position: relative;
+    }
 </style>
 
 
@@ -24,7 +33,6 @@
                 <ol class="breadcrumb float-sm-left">
                     <li class="breadcrumb-item active"><a asp-action="Index" asp-controller="Candidate">Candidate</a></li>
                     <li class="breadcrumb-item"><a asp-action="Profile" asp-controller="Candidate">Profile</a></li>
-                    @*<li class="breadcrumb-item active">Top Navigation</li>*@
                 </ol>
             </div><!-- /.col -->
             <div class="col-sm-6 ">
@@ -41,116 +49,130 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="card card-success card-outline">
-                    <div class="card-body box-profile">
-                        <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="~/images/avatar.jpg" alt="">
+                <div id="divProfileMenu">
+                    <div class="card card-success card-outline">
+
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle" src="~/images/avatar.jpg" alt="">
+                            </div>
+
+                            <h3 id="profile-name" class="profile-username text-center"></h3>
+
+                            <p id="profile-designation" class="text-muted text-center"></p>
+
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b><span class="fas fa-envelope mr-1 text-success"></span> Email</b>
+                                    <a id="profile-email" class="float-right"></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>&nbsp;<i class="fas fa-mobile-alt text-success"></i>&nbsp; Mobile</b>
+                                    <a id="profile-mobile" class="float-right"></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b><i class="fas fa-business-time text-success"></i> Experience</b>
+                                    <a id="profile-experience" class="float-right"></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b><i class="fas fa-map-marker-alt mr-1 ml-1 text-success"></i> Location</b>
+                                    <a id="profile-location" class="float-right"></a>
+                                </li>
+                            </ul>
+
+
                         </div>
-
-                        <h3 id="profile-name" class="profile-username text-center"></h3>
-
-                        <p id="profile-designation" class="text-muted text-center"></p>
-
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b><span class="fas fa-envelope mr-1 text-success"></span> Email</b>
-                                <a id="profile-email" class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>&nbsp;<i class="fas fa-mobile-alt text-success"></i>&nbsp; Mobile</b>
-                                <a id="profile-mobile" class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b><i class="fas fa-business-time text-success"></i> Experience</b>
-                                <a id="profile-experience" class="float-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b><i class="fas fa-map-marker-alt mr-1 ml-1 text-success"></i> Location</b>
-                                <a id="profile-location" class="float-right"></a>
-                            </li>
-                        </ul>
-
-
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
-                </div>
 
-
-
-
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="fas fa-book mr-1"></i> Experience</h5>
+                    <div class="card">
+                        <a href="javascript:void(0);" data-focus="#divBasic" class="card-body text-dark bg-warning">
+                            <h5 class="card-title"><i class="fas fa-user-tie mr-1"></i> Basic Details</h5>
+                        </a>
                     </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-body bg-warning">
-                        <h5 class="card-title"><i class="fas fa-pencil-alt mr-1"></i> Skills</h5>
+                    <div class="card">
+                        <a href="javascript:void(0);" data-focus="#divExperience" class="card-body text-dark">
+                            <h5 class="card-title"><i class="fas fa-business-time mr-1"></i> Experiences</h5>
+                        </a>
                     </div>
-                </div>
 
+                    <div class="card">
+                        <a href="javascript:void(0);" data-focus="#divSkills" class="card-body text-dark">
+                            <h5 class="card-title"><i class="fas fa-pencil-alt mr-1"></i> Skills</h5>
+                        </a>
+                    </div>
+
+                    <div class="card">
+                        <a href="javascript:void(0);" data-focus="#divPersonal" class="card-body text-dark">
+                            <h5 class="card-title"><i class="fas fa-user-clock mr-1"></i> Personal Details</h5>
+                        </a>
+                    </div>
+
+                </div>
             </div>
             <div class="col-lg-8">
-                <form id="frmCandidate" class="card">
+
+                <div class="card" id="divBasic">
                     <div class="card-header text-success">
                         <h5> Basic Details</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div data-cntrl>
-                                <input id="Id" name="Id" type="hidden">
-                                <input id="Created" name="Created" type="hidden">
-                                <input id="LastUpdated" name="LastUpdated" type="hidden">
-                                <input id="LoggedInAt" name="LoggedInAt" type="hidden">
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group" data-cntrl>
-                                    <label for="Name" class="control-label">Name</label>
-                                    <input type="text" id="Name" name="Name" class="form-control" />
+                        <form id="frmCandidate">
+                            <div class="row">
+                                <div data-cntrl>
+                                    <input id="Id" name="Id" type="hidden">
+                                    <input id="Created" name="Created" type="hidden">
+                                    <input id="LastUpdated" name="LastUpdated" type="hidden">
+                                    <input id="LoggedInAt" name="LoggedInAt" type="hidden">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Name" class="control-label">Name</label>
+                                        <input type="text" id="Name" name="Name" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Email" class="control-label">Email</label>
+                                        <input type="email" id="Email" name="Email" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Mobile" class="control-label">Mobile</label>
+                                        <input type="text" id="Mobile" name="Mobile" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="ExpYear" class="control-label">Experience In Years</label>
+                                        <input type="number" id="ExpYear" name="ExpYear" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="ExpMonth" class="control-label">Experience In Months</label>
+                                        <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Location" class="control-label">Location</label>
+                                        <input type="text" id="Location" name="Location" class="form-control" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group" data-cntrl>
-                                    <label for="Email" class="control-label">Email</label>
-                                    <input type="email" id="Email" name="Email" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group" data-cntrl>
-                                    <label for="Mobile" class="control-label">Mobile</label>
-                                    <input type="text" id="Mobile" name="Mobile" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group" data-cntrl>
-                                    <label for="ExpYear" class="control-label">Experience In Years</label>
-                                    <input type="number" id="ExpYear" name="ExpYear" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group" data-cntrl>
-                                    <label for="ExpMonth" class="control-label">Experience In Months</label>
-                                    <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group" data-cntrl>
-                                    <label for="Location" class="control-label">Location</label>
-                                    <input type="text" id="Location" name="Location" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <input type="button" value="Save" class="btn btn-success saveBasic" />
-                            <input type="button" value="Cancel" class="btn btn-secondary cancelBasic" />
-                        </div>
+                            <div class="form-group">
+                                <input type="button" value="Save" class="btn btn-success saveBasic" />
+                                <input type="button" value="Cancel" class="btn btn-secondary cancelBasic" />
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
 
-
-                <div class="card">
+                <div class="card" id="divExperience">
                     <div class="card-header text-success">
                         <div class="row">
                             <h5 class="col-lg-8">
@@ -188,9 +210,7 @@
                                             <div class="row">
                                                 <div data-cntrl>
                                                     <input id="Id" name="Id" type="hidden">
-                                                    <input id="CandidateId" name="CandidateId" type="hidden">
                                                     <input id="Created" name="Created" type="hidden">
-                                                    <input id="LastUpdated" name="LastUpdated" type="hidden">
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="form-group" data-cntrl>
@@ -212,7 +232,7 @@
                                                         <label class="control-label">&nbsp;</label>
                                                         <br />
 
-                                                        <div class="icheck-primary d-inline">
+                                                        <div class="icheck-info d-inline">
                                                             <input class="form-check-input" id="IsCurrent" name="IsCurrent" type="checkbox" />
                                                             <label for="IsCurrent"> Is Current</label>
                                                         </div>
@@ -286,20 +306,207 @@
 
                     </div>
                 </div>
+
+
+                <div class="card" id="divSkills">
+                    <div class="card-header text-success">
+                        <div class="row">
+                            <h5 class="col-lg-8">
+                                Skills
+                            </h5>
+                            <div class="col-lg-4">
+                                <a href="javascript:void(0);" class="btn btn-outline-success btn-sm float-right addSkill">Add <i class="fas fa-plus-circle"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <table id="tabSkills" class="table">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th>Skill Name</th>
+                                    <th style="width: 40px">Experience</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <div class="modal fade" id="modal-skill">
+                            <!-- .modal-dialog -->
+                            <div class="modal-dialog modal-lg">
+                                <!-- .modal-content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Add Skill</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="frmSkill">
+                                            <div class="row">
+                                                <div data-cntrl>
+                                                    <input id="Id" name="Id" type="hidden">
+                                                    <input id="Created" name="Created" type="hidden">
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="SkillName" class="control-label">Skill Name</label>
+                                                        <input type="text" id="SkillName" name="SkillName" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="ExpYear" class="control-label">Experience In Years</label>
+                                                        <input type="number" id="ExpYear" name="ExpYear" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group" data-cntrl>
+                                                        <label for="ExpMonth" class="control-label">Experience In Months</label>
+                                                        <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <input type="button" value="Save Changes" class="btn btn-success saveSkill" />
+                                        <input type="button" value="Cancel" data-dismiss="modal" class="btn btn-secondary" />
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="card" id="divPersonal">
+                    <div class="card-header text-success">
+                        <h5> Personal Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="frmPersonal">
+                            <div class="row">
+                                <div data-cntrl>
+                                    <input id="Id" name="Id" type="hidden">
+                                    <input id="Created" name="Created" type="hidden">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Gender" class="control-label">Gender</label>
+                                        <div class="form-group">
+                                            <div class="icheck-info d-inline">
+                                                <input type="radio" id="Male" name="Gender" checked="">
+                                                <label for="Male">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="icheck-info d-inline">
+                                                <input type="radio" id="Female" name="Gender">
+                                                <label for="Female">
+                                                    Female
+                                                </label>
+                                            </div>
+                                            <div class="icheck-info d-inline">
+                                                <input type="radio" id="Transgender" name="Gender">
+                                                <label for="Transgender">
+                                                    Transgender
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="BirthDate" class="control-label">Date of Birth</label>
+                                        <input type="date" id="BirthDate" name="BirthDate" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="BloodGroup" class="control-label">Blood Group</label>
+                                        <select id="BloodGroup" name="BloodGroup" class="form-control">
+                                            @if (ViewBag.BloodGroup != null)
+                                            {
+                                                foreach (var bloodgroup in ViewBag.BloodGroup)
+                                                {
+                                                    <option value="@bloodgroup.Key">@bloodgroup.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="MaritalStatus" class="control-label">Marital Status</label>
+                                        <select id="MaritalStatus" name="MaritalStatus" class="form-control">
+                                            @if (ViewBag.MartialStatus != null)
+                                            {
+                                                foreach (var martialStatus in ViewBag.MartialStatus)
+                                                {
+                                                    <option value="@martialStatus.Key">@martialStatus.Value</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Address" class="control-label">Address</label>
+                                        <input type="text" id="Address" name="Address" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="City" class="control-label">City</label>
+                                        <input type="text" id="City" name="City" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="Pincode" class="control-label">Pincode</label>
+                                        <input type="text" id="Pincode" name="Pincode" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group" data-cntrl>
+                                        <label for="State" class="control-label">State</label>
+                                        <input type="text" id="State" name="State" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="button" value="Save" class="btn btn-success saveBasic" />
+                                <input type="button" value="Cancel" class="btn btn-secondary cancelBasic" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
 
-        @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-experience">
-                Launch Modal
-            </button>*@
+        
+    </div>
+</div>
 
+<a href="javascript:void(0);" class="btn btn-warning back-to-top">
+    <i class="fas fa-chevron-up"></i>
+</a>
 
+@section Scripts {
 
-        @section Scripts {
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-            <script type="text/javascript">
+    <script type="text/javascript">
 
 
                 var id = 0;
@@ -313,6 +520,11 @@
                         candManager.saveBasic();
                     });
 
+                    $('.cancelBasic').click(() => {
+                        candManager.cancelBasic();
+                    });
+
+                    //----------Experience-------//
                     $('.addExp').click(() => {
                         candManager.addExp();
                     });
@@ -325,33 +537,33 @@
                         candManager.cancelExp();
                     });
 
-                    $('.cancelBasic').click(() => {
-                        candManager.cancelBasic();
+
+                    //----------Skill-------//
+                    $('.addSkill').click(() => {
+                        candManager.addSkill();
+                    });
+
+                    $('.saveSkill').click(() => {
+                        candManager.saveSkill();
+                    });
+
+                    $('#modal-skill [data-dismiss]').click(() => {
+                        candManager.cancelSkill();
                     });
 
 
+                    $('#divProfileMenu a[data-focus]').click(function() {
 
-                    //$('textarea').keypress(function (event) {
+                        $('html, body').animate({
+                            scrollTop: ($($(this).data('focus')).offset().top - 15)
+                        }, 1000);
 
-                    //    if ($(event.currentTarget).next('.textcounter').length > 0) {
-                    //        const maxLength = $(event.currentTarget).next('.textcounter').data('maxlength');
+                        $('#divProfileMenu a[data-focus]').removeClass('bg-warning');
+                        $(this).addClass('bg-warning');                        
 
-                    //        const textareaLength = $(event.currentTarget).val().length;
+                    });
 
-                    //        $(event.currentTarget).next('.textcounter').text(`${maxLength - textareaLength} Character(s) left`);
-                    //    }
-                    //});
 
-                    //$('textarea').keyup(function (event) {
-
-                    //    if ($(event.currentTarget).next('.textcounter').length > 0) {
-                    //        const maxLength = $(event.currentTarget).next('.textcounter').data('maxlength');
-
-                    //        const textareaLength = $(event.currentTarget).val().length;
-
-                    //        $(event.currentTarget).next('.textcounter').text(`${maxLength - textareaLength} Character(s) left`);
-                    //    }
-                    //});
 
 
 
@@ -372,7 +584,7 @@
                     var init = async () => {
 
                         viewManager.init({
-                            eleContainer: '#frmCandidate, #frmExperience'
+                            eleContainer: '#frmCandidate, #frmExperience, #frmSkill, #frmPersonal'
                         });
 
 
@@ -383,7 +595,7 @@
                             await loadData(id);
                         }
 
-                        //--------------CANDIDATE VALIDATION--------------//
+                        //--------------BASIC DETAILS VALIDATION--------------//
                         viewManager.applyValidate({
                             eleContainer: '#frmCandidate',
                             rules: {
@@ -420,11 +632,59 @@
                             }
                         });
 
+
+                        //--------------SKILL VALIDATION--------------//
+                        viewManager.applyValidate({
+                            eleContainer: '#frmSkill',
+                            rules: {
+                                SkillName: { required: true, maxlength: 100 },
+                                ExpYear: { min: 0, max: 40 },
+                                ExpMonth: { min: 0, max: 12 },
+                            },
+                            messages: {
+                                SkillName: { required: "Please enter a Skill", maxlength: "Your name must not exceed 100 characters long" },
+                                ExpYear: { min: `Experience In Years cannot be less than 0`, max: `Experience In Years cannot be greater than 40` },
+                                ExpMonth: { min: `Experience In Months cannot be less than 0`, max: `Experience In Months cannot be greater than 12` },
+                            }
+                        });
+
                     }
 
 
 
 
+
+                    var loadData = async (id)=> {
+
+                        await Promise.all([
+                            getBasicDetails(id),
+                            getExperiences(id),
+                            getSkills(id)
+                        ]);
+
+                    }
+
+
+                    //------------------------------------------BASIC DETAILS STARTS------------------------------------//
+                    var getBasicDetails = async (id) => {
+
+                        $.get(`@Url.Action("GetBasicDetails")/${id}`)
+                            .done((candidate) => {
+
+                                viewManager.setFormData('#frmCandidate', candidate);
+
+                                $('#profile-name').text(candidate.name);
+                                $('#profile-email').text(candidate.email);
+                                $('#profile-mobile').text(candidate.mobile);
+                                $('#profile-experience').text(candidate.expYear + ' years, ' + candidate.expMonth + ' months');
+                                $('#profile-location').text(candidate.location);
+
+
+                            }).fail(() => {
+
+                            })
+
+                    }
 
 
                     var saveBasic = () => {
@@ -437,7 +697,7 @@
 
                             if (data) {
 
-                                $.post('@Url.Action("BasicDetails")', data)
+                                $.post('@Url.Action("SaveBasicDetails")', data)
                                     .done((res) => {
 
                                         if (res.isSuccess) {
@@ -463,12 +723,108 @@
                     var cancelBasic = () => {
 
                     }
+                    //------------------------------------------BASIC DETAILS ENDS------------------------------------//
 
 
 
+                    //------------------------------------------EXPERIENCE STARTS------------------------------------//
+                    var getExperiences = async (id) => {
+
+                        $.get(`@Url.Action("GetExperiences")/${id}`)
+                            .done((jobExperiences) => {
 
 
-                    var addExp = (btn) => {
+
+                                if (jobExperiences.length > 0) {
+
+                                    $('.timeline').children().not('.start-point').remove();
+
+                                    $(jobExperiences).each((i, exp) => {
+
+
+                                        //--------------------END DATE--------------------//
+                                        const $spanEndDate = $('<span/>', {
+                                            class: 'bg-gradient-gray',
+                                            html: '&nbsp;' + (exp.isCurrent ?  'Till Date' :  general.mnthYearName(exp.endMonth, exp.endYear)) + ' &nbsp;'
+                                        })
+                                        const $divLabel = $('<div/>', { class: 'time-label' });
+
+                                        $divLabel.append($spanEndDate);
+
+
+                                        //--------------------ICON--------------------//
+                                        const $icon = $('<i/>', { class: 'fas fa-business-time bg-gradient-cyan' });
+
+                                        //--------------------HEADER--------------------//
+                                        const $actionDelete = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'time',
+                                            html: `<i class="fas fa-trash text-secondary" title="Delete"></i>`,
+                                            onclick: `candManager.deleteExp(${exp.id})`
+                                        });
+
+                                        const $actionEdit = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'time',
+                                            html: `<i class="fas fa-edit text-primary" title="Edit"></i>`,
+                                            onclick: `candManager.editExp(${exp.id})`
+                                        });
+                                        const $design = $('<h2/>', { class: 'timeline-header text-primary font-weight-bold', text: exp.designation });
+
+
+                                        //--------------------BODY--------------------//
+                                        const $Org = $('<span/>', { class: 'text-uppercase text-xs', text: exp.organization });
+                                        const $jobprofile = $('<small/>', { class: 'font-italic', text: exp.jobProfile });
+                                        const $divBody = $('<div/>', { class: 'timeline-body' });
+
+                                        $divBody.append($Org);
+                                        $divBody.append($('<br />'));
+                                        $divBody.append($jobprofile);
+
+
+                                        //--------------------FOOTER--------------------//
+                                        const $StartDate = $('<small/>', {
+                                            title: "Start Month - Year",
+                                            class: 'font-italic',
+                                            html: `<i class="fas fa-clock" ></i> ${general.mnthYearName(exp.startMonth, exp.startYear)}`
+                                        });
+                                        const $divFooter = $('<div/>', { class: 'timeline-footer' });
+
+
+                                        $divFooter.append($StartDate);
+
+
+                                        const $divitem = $('<div/>', { class: 'timeline-item' });
+                                        $divitem.append($actionDelete);
+                                        $divitem.append($actionEdit);
+                                        $divitem.append($design);
+                                        $divitem.append($divBody);
+                                        $divitem.append($divFooter);
+
+
+                                        const $divDesc = $('<div/>', { class: 'time-desc' });
+
+                                        $divDesc.append($icon);
+                                        $divDesc.append($divitem);
+
+
+                                        $('.timeline').prepend($divDesc);
+                                        $('.timeline').prepend($divLabel);
+                                    });
+
+
+                                    $('.timeline').removeClass('d-none');
+                                }
+
+
+                            }).fail(() => {
+
+                            })
+
+                    }
+
+
+                    var addExp = () => {
 
                         viewManager.resetFormData('#frmExperience', true);
 
@@ -572,132 +928,6 @@
                     }
 
 
-
-                    var loadData = async (id)=> {
-
-                        await Promise.all([
-                            getBasicDetails(id),
-                            getExperiences(id)
-                        ]);
-
-                    }
-
-                    var getBasicDetails = async (id) => {
-
-                        $.get(`@Url.Action("GetBasicDetails")/${id}`)
-                            .done((candidate) => {
-
-                                viewManager.setFormData('#frmCandidate', candidate);
-
-                                $('#profile-name').text(candidate.name);
-                                $('#profile-email').text(candidate.email);
-                                $('#profile-mobile').text(candidate.mobile);
-                                $('#profile-experience').text(candidate.expYear + ' years, ' + candidate.expMonth + ' months');
-                                $('#profile-location').text(candidate.location);
-
-
-                            }).fail(() => {
-
-                            })
-
-                    }
-
-                    var getExperiences = async (id) => {
-
-                        $.get(`@Url.Action("GetExperiences")/${id}`)
-                            .done((jobExperiences) => {
-
-
-
-                                if (jobExperiences.length > 0) {
-
-                                    $('.timeline').children().not('.start-point').remove();
-
-                                    $(jobExperiences).each((i, exp) => {
-
-
-                                        //--------------------END DATE--------------------//
-                                        const $spanEndDate = $('<span/>', {
-                                            class: 'bg-gradient-gray',
-                                            html: '&nbsp;' + (exp.isCurrent ?  'Till Date' :  general.mnthYearName(exp.endMonth, exp.endYear)) + ' &nbsp;'
-                                        })
-                                        const $divLabel = $('<div/>', { class: 'time-label' });
-
-                                        $divLabel.append($spanEndDate);
-
-
-                                        //--------------------ICON--------------------//
-                                        const $icon = $('<i/>', { class: 'fas fa-business-time bg-gradient-cyan' });
-
-                                        //--------------------HEADER--------------------//
-                                        const $actionDelete = $('<a/>', {
-                                            href: 'javascript:void(0);',
-                                            class: 'time',
-                                            html: `<i class="fas fa-trash text-danger" title="Delete"></i>`,
-                                            onclick: `candManager.deleteExp(${exp.id})`
-                                        });
-
-                                        const $actionEdit = $('<a/>', {
-                                            href: 'javascript:void(0);',
-                                            class: 'time',
-                                            html: `<i class="fas fa-edit text-green" title="Edit"></i>`,
-                                            onclick: `candManager.editExp(${exp.id})`
-                                        });
-                                        const $design = $('<h2/>', { class: 'timeline-header text-primary font-weight-bold', text: exp.designation });
-
-
-                                        //--------------------BODY--------------------//
-                                        const $Org = $('<span/>', { class: 'text-uppercase text-xs', text: exp.organization });
-                                        const $jobprofile = $('<small/>', { class: 'font-italic', text: exp.jobProfile });
-                                        const $divBody = $('<div/>', { class: 'timeline-body' });
-
-                                        $divBody.append($Org);
-                                        $divBody.append($('<br />'));
-                                        $divBody.append($jobprofile);
-
-
-                                        //--------------------FOOTER--------------------//
-                                        const $StartDate = $('<small/>', {
-                                            title: "Start Month - Year",
-                                            class: 'font-italic',
-                                            html: `<i class="fas fa-clock" ></i> ${general.mnthYearName(exp.startMonth, exp.startYear)}`
-                                        });
-                                        const $divFooter = $('<div/>', { class: 'timeline-footer' });
-
-
-                                        $divFooter.append($StartDate);
-
-
-                                        const $divitem = $('<div/>', { class: 'timeline-item' });
-                                        $divitem.append($actionDelete);
-                                        $divitem.append($actionEdit);
-                                        $divitem.append($design);
-                                        $divitem.append($divBody);
-                                        $divitem.append($divFooter);
-
-
-                                        const $divDesc = $('<div/>', { class: 'time-desc' });
-
-                                        $divDesc.append($icon);
-                                        $divDesc.append($divitem);
-
-
-                                        $('.timeline').prepend($divDesc);
-                                        $('.timeline').prepend($divLabel);
-                                    });
-
-
-                                    $('.timeline').removeClass('d-none');
-                                }
-
-
-                            }).fail(() => {
-
-                            })
-
-                    }
-
-
                     var isCurrentExp = () => {
                         if ($('#IsCurrent').prop('checked')) {
 
@@ -728,6 +958,169 @@
                             $("#EndMonth").rules("add", { max: 12, messages: { max: "End Month cannot be greater than 12" } });
                         }
                     }
+                    //------------------------------------------EXPERIENCE ENDS------------------------------------//
+
+
+
+                    //------------------------------------------SKILL STARTS------------------------------------//
+                    var getSkills = async (id) => {
+
+                        $.get(`@Url.Action("GetSkills")/${id}`)
+                            .done((skills) => {
+
+
+
+                                if (skills.length > 0) {
+
+                                    const $tbody = $('#tabSkills tbody');
+
+                                    $tbody.empty();
+
+                                    $(skills).each((i, skill) => {
+
+                                        const $tdSkill = $('<td/>', { html: skill.skillName });
+                                        const $tdExp = $('<td/>', { html: ` <span class="badge bg-success">${skill.expYear} Years, ${skill.expMonth} Months</span>` });
+
+
+
+                                        const $actionEdit = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'float-right mr-3',
+                                            html: `<small class="fas fa-edit text-primary" title="Edit"></small>`,
+                                            onclick: `candManager.editSkill(${skill.id})`
+                                        });
+
+                                        const $actionDelete = $('<a/>', {
+                                            href: 'javascript:void(0);',
+                                            class: 'float-right',
+                                            html: `<small class="fas fa-trash text-secondary" title="Delete"></small>`,
+                                            onclick: `candManager.deleteSkill(${skill.id})`
+                                        });
+
+                                        const $tdAction = $('<td/>');
+
+
+                                        $tdAction.append($actionDelete);
+                                        $tdAction.append($actionEdit);
+
+                                        const $tr = $('<tr/>');
+
+                                        $tr.append($tdSkill);
+                                        $tr.append($tdExp);
+                                        $tr.append($tdAction);
+
+                                        $tbody.append($tr);
+
+                                    });
+
+                                    $('#tabSkills').removeClass('d-none');
+                                }
+
+
+                            }).fail(() => {
+
+                            })
+
+                    }
+
+                    var addSkill = () => {
+
+                        viewManager.resetFormData('#frmSkill', true);
+
+                        $('#modal-skill').modal('show');
+
+
+                    }
+
+                    var editSkill = (skillId) => {
+
+
+                        viewManager.resetFormData('#frmSkill', true);
+
+                        $.get(`@Url.Action("GetSkill")/${skillId}`)
+                            .done((jobExp) => {
+
+                                viewManager.setFormData('#frmSkill', jobExp);
+
+                                $('#modal-skill').modal('show');
+
+                            }).fail(() => {
+
+
+                            });
+                    }
+
+
+                    var saveSkill = () => {
+
+                        if ($('#frmSkill').valid()) {
+
+                            var data = viewManager.getFormData('#frmSkill');
+
+                            data.CandidateId = id;
+
+                            if (data) {
+
+                                $.post('@Url.Action("SaveSkill")', data)
+                                    .done((res) => {
+
+                                        if (res.isSuccess) {
+
+                                            toastr.success('Saved', 'Saved successfully');
+
+                                            getSkills(id);
+
+                                            $('#modal-skill').modal('hide');
+                                        }
+                                        else {
+                                            toastr.error('Error', 'Failed to save');
+                                        }
+
+
+                                    }).fail(() => {
+
+                                        toastr.error('Error', 'Failed to save');
+
+                                    });
+                            }
+                            else {
+                                toastr.error('Error', "Couldn't find data to save");
+                            }
+                        }
+                    }
+
+                    var deleteSkill = (expId) => {
+
+                        var data = { skillId: expId };
+
+                        $.post('@Url.Action("DeleteSkill")', data)
+                            .done((res) => {
+
+                                if (res.isSuccess) {
+
+                                    toastr.success('Delete', 'Deleted successfully');
+
+                                    getSkills(id);
+                                }
+                                else {
+                                    toastr.error('Error', 'Failed to delete');
+                                }
+
+
+                            }).fail(() => {
+
+                                toastr.error('Error', 'Failed to delete');
+
+                            });
+                    }
+
+                    var cancelSkill= () => {
+
+                    }
+
+                    //------------------------------------------SKILL ENDS------------------------------------//
+
+
 
                     return {
                         init: init,
@@ -738,16 +1131,20 @@
                         deleteExp: deleteExp,
                         saveExp: saveExp,
                         cancelExp: cancelExp,
-                        isCurrentExp:isCurrentExp
+                        isCurrentExp: isCurrentExp,
+                        addSkill: addSkill,
+                        editSkill: editSkill,
+                        deleteSkill: deleteSkill,
+                        saveSkill: saveSkill,
+                        cancelSkill: cancelSkill,
                     }
 
 
                 })();
 
 
-            </script>
+    </script>
 
-        }
-    </div>
-</div>
+}
+
 <!-- /.Content -->
