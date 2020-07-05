@@ -40,8 +40,10 @@ namespace ResumeShortListing
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
             }
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -52,7 +54,7 @@ namespace ResumeShortListing
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
     }

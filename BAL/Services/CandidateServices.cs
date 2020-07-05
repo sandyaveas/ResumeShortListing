@@ -47,6 +47,7 @@ namespace BAL.Services
 
             return context.SaveChanges();
         }
+                
 
 
         public List<Candidate> GetList()
@@ -57,6 +58,11 @@ namespace BAL.Services
         public Candidate GetItem(int Id)
         {
             return context.Candidate.Where(a => a.Id == Id).FirstOrDefault();
+        }
+
+        public Candidate GetItem(string email, string password)
+        {
+            return context.Candidate.Where(a => a.Email == email && a.Password == password).FirstOrDefault();
         }
 
         public async Task<Candidate> GetItemAsync(int Id)

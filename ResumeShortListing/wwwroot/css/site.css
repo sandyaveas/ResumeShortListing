@@ -113,3 +113,32 @@ body {
     bottom: 4rem;
     border-radius: 50%;
 }
+
+.dropdown-menu-md > .dropdown-header {
+    padding: 0px !important;
+}
+
+.dropdown-menu-md > .dropdown-item {
+    padding: 0 1rem !important;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #28a745;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }

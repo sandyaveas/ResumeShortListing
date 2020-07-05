@@ -305,3 +305,5 @@ $('.back-to-top').click(() => {
         scrollTop: '0'
     }, 1000);
 })
+
+Array.prototype.last = function () { return this[this.length - 1]; }

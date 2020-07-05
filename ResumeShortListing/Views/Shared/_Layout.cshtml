@@ -9,8 +9,8 @@
 
 
     <!-- Font Awesome -->
-    <link href="~/lib/plugins/fontawesome-free/css/all.css" rel="stylesheet" />
-    <link href="~/lib/template/dist/css/adminlte.css" rel="stylesheet" />
+    <link href="~/lib/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/template/dist/css/adminlte.min.css" rel="stylesheet" />
 
     <!-- iCheck for checkboxes and radio inputs -->
     <link href="~/lib/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
@@ -18,10 +18,9 @@
     <!-- Toastr -->
     @*<link href="~/lib/plugins/toastr/toastr.min.css" rel="stylesheet" />*@
 
-    <!-- SweetAlert2 -->
-    @*<link href="~/lib/plugins/sweetalert2/sweetalert2.min.css" rel="stylesheet" />*@
-    @*<link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />*@
-    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/dark.css" rel="stylesheet" />
+    <!-- SweetAlert2 -->    
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+    
 
     <!-- DataTables -->
     <link href="~/lib/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -190,16 +189,29 @@
                             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i class="fas fa-th-large"></i></a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" data-toggle="dropdown" href="#">
+                            <i class="fas fa-user-tie"></i>                            
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                            <span class="dropdown-header">USER NAME</span>
+                            <div class="dropdown-divider"></div>                            
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                                <span class="float-right text-muted text-sm"></span>
+                            </a>                           
+                        </div>
                     </li>
+                    @*<li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i class="fas fa-th-large"></i></a>
+                    </li>*@
                 </ul>
             </div>
         </nav>
         <!-- /.navbar -->
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-
             @RenderBody()
         </div>
         <!-- /.content-wrapper -->

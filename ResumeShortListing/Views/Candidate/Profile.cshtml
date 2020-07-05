@@ -25,7 +25,7 @@
 <!-- Added from GitHub -->
 <!-- Added from VS 2019 -->
 <!-- Content Header (Page header) -->
-<div class="content-header">
+@*<div class="content-header">
     <div class="container">
         <div class="row mb-2">
             <div class="col-sm-6">
@@ -34,13 +34,13 @@
                     <li class="breadcrumb-item active"><a asp-action="Index" asp-controller="Candidate">Candidate</a></li>
                     <li class="breadcrumb-item"><a asp-action="Profile" asp-controller="Candidate">Profile</a></li>
                 </ol>
-            </div><!-- /.col -->
+            </div>
             <div class="col-sm-6 ">
                 <a class="btn btn-dark float-right" asp-action="Index">Back to List</a>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
+            </div>
+        </div>
+    </div>
+</div>*@
 <!-- /.content-header -->
 <!-- Main content -->
 <div class="content">
@@ -590,7 +590,7 @@
 
                         if (window.location.href.split('/').indexOf('Edit') >= 0) {
 
-                            id = window.location.href.slice(-1);
+                            id = window.location.href.split('/').last();
 
                             await loadData(id);
                         }
@@ -638,12 +638,12 @@
                             eleContainer: '#frmSkill',
                             rules: {
                                 SkillName: { required: true, maxlength: 100 },
-                                ExpYear: { min: 0, max: 40 },
+                                ExpYear: { min: 0, max: 45 },
                                 ExpMonth: { min: 0, max: 12 },
                             },
                             messages: {
                                 SkillName: { required: "Please enter a Skill", maxlength: "Your name must not exceed 100 characters long" },
-                                ExpYear: { min: `Experience In Years cannot be less than 0`, max: `Experience In Years cannot be greater than 40` },
+                                ExpYear: { min: `Experience In Years cannot be less than 0`, max: `Experience In Years cannot be greater than 45` },
                                 ExpMonth: { min: `Experience In Months cannot be less than 0`, max: `Experience In Months cannot be greater than 12` },
                             }
                         });

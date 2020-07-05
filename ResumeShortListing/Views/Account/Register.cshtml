@@ -1,0 +1,214 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Resume Analysis Login</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+
+
+    <!-- Font Awesome -->
+    <link href="~/lib/plugins/fontawesome-free/css/all.css" rel="stylesheet" />
+    <link href="~/lib/template/dist/css/adminlte.min.css" rel="stylesheet" />
+
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link href="~/lib/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
+
+    <!-- SweetAlert2 -->
+    <link href="~/lib/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+
+        .btn-link {
+            margin-top: -5px !important;
+            margin-left: -5px !important;
+        }
+
+        .register-box {
+            width: 450px;
+        }
+    </style>
+
+</head>
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo">
+            <a><b>Resume</b>Screening</a>
+        </div>
+
+        <div id="divEmployee" class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Sign up for Employee</p>
+
+                <form id="frmEmployee" action="@Url.Action("RegisterEmployee", "Account")" method="post">
+                    <div class="form-group input-group mb-3">
+                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Full Name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mb-3">
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mb-3">
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mb-3">
+                        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="Retype password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mb-3">
+                        <input type="number" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-mobile-alt"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group input-group mb-3">
+
+                        <input type="number" class="form-control" id="ExpYear" name="ExpYear" placeholder="Total Exp In Years">
+
+
+                        <input type="number" class="form-control" id="ExpMonth" name="ExpMonth" placeholder="Months">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-business-time"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group input-group mb-3">
+                        <input type="text" class="form-control" id="Location" name="Location" placeholder="Location">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-map-marker-alt"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            I already have a <a href="@Url.Action("Login", "Account")" class="text-success text-center"><b>Login</b></a>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block" onclick="registerManager.validEmployee()">Register</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+
+
+
+                @*<div class="social-auth-links text-center">
+                        <p>- OR -</p>
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fab fa-facebook mr-2"></i>
+                            Sign up using Facebook
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i>
+                            Sign up using Google+
+                        </a>
+                    </div>*@
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/lib/template/dist/js/adminlte.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="~/lib/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            registerManager.init();
+
+
+
+        });
+
+        const registerManager = (() => {
+
+
+            const init = () => {
+
+                viewManager.applyValidate({
+                    eleContainer: '#frmEmployee',
+                    rules: {
+                        Name: { required: true, maxlength: 1000 },
+                        Email: { required: true, email: true, maxlength: 100 },
+                        Mobile: { required: true, min:999999999, max: 99999999999 },
+                        Password: { required: true, minlength: 6, maxlength: 15 },
+                        ConfirmPassword: { equalTo: "#Password" },
+                        ExpYear: { required: true, min: 0, max: 45 },
+                        ExpMonth: { min: 0, max: 12 },
+                        Location: { required: true, maxlength: 255 },
+                    },
+                    messages: {
+                        Name: { required: "Please provide a Full Name", maxlength: "Your name must not exceed 1000 characters long" },
+                        Email: { required: "Please enter a email address", email: "Please enter a valid email address", maxlength: "Your name must not exceed 100 characters long" },
+                        Mobile: { required: "Please enter a Mobile number", min: "Your mobile must should be atleast 10 numbers", max: "Your name must not exceed 15 numbers" },
+                        Password: { required: "Please enter your password", minlength: "Your password should be atleast 6 characters long", maxlength: "Your password must not exceed 15 characters long" },
+                        ConfirmPassword: { equalTo : "Re-typed password doesn't match" },
+                        ExpYear: { required: "Please enter a total experience in years", min: `Experience In Years cannot be less than 0`, max: `Experience In Years cannot be greater than 45` },
+                        ExpMonth: { min: `Experience In Months cannot be less than 0`, max: `Experience In Months cannot be greater than 12` },
+                        Location: { required: "Please enter a Current Lcoation", maxlength: "Your name must not exceed 255 characters long" },
+                    }
+                });
+            }
+
+            const validEmployee = () => {
+
+                return $('#frmEmployee').valid();
+            }
+
+            return {
+                init: init,
+                validEmployee: validEmployee
+            }
+
+        })();
+
+    </script>
+</body>
+</html>
